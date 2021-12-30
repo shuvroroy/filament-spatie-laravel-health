@@ -1,6 +1,6 @@
 {
     "name": "shuvroroy/filament-spatie-laravel-health",
-    "description": "This is my package filament-spatie-laravel-health",
+    "description": "This plugin is built on top of Spatie's Laravel-health package",
     "keywords": [
         "filament",
         "laravel-health",
