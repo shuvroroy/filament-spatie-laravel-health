@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "filament/filament": "^2.0",
+        "filament/filament": "^2.7.8",
         "livewire/livewire": "^2.8",
         "spatie/laravel-health": "^1.7",
         "spatie/laravel-package-tools": "^1.9.2"

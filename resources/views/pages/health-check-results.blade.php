@@ -4,7 +4,7 @@
 			Spatie\Health\Enums\Status::ok()->value => 'bg-emerald-100',
 			Spatie\Health\Enums\Status::warning()->value => 'bg-yellow-100',
 			Spatie\Health\Enums\Status::skipped()->value => 'bg-blue-100',
-			Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'bg-red-100 ',
+			Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'bg-red-100',
 			default => 'bg-gray-100'
 		};
 	}
@@ -31,13 +31,14 @@
 		};
 	}
 @endphp
+
 <x-filament::page>
 	@if (count($checkResults?->storedCheckResults ?? []))
 		<dl class=" grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			@foreach ($checkResults->storedCheckResults as $result)
 				<div class="flex items-start p-6 space-x-2 overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow">
-					<div class="rounded-full p-2.5 {{ backgroundColor($result->status) }} justify-center items-center flex">
-						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative {{ iconColor($result->status) }}" viewBox="0 0 20 20" fill="currentColor">
+					<div class="flex justify-center items-center rounded-full p-2.5 {{ backgroundColor($result->status) }}">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 {{ iconColor($result->status) }}" viewBox="0 0 20 20" fill="currentColor">
 							@if(icon($result->status) == 'check-circle')
 								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
 							@elseif(icon($result->status) == 'exclamation-circle')
@@ -58,9 +59,9 @@
 						</dd>
 						<dt class="mt-0 text-sm font-medium text-gray-600 md:mt-1">
 							@if (!empty($result->notificationMessage))
-							{{ $result->notificationMessage }}
+								{{ $result->notificationMessage }}
 							@else
-							{{ $result->shortSummary }}
+								{{ $result->shortSummary }}
 							@endif
 						</dt>
 					</div>
