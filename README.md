@@ -5,10 +5,9 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/shuvroroy/filament-spatie-laravel-health/Check%20&%20fix%20styling?label=code%20style)](https://github.com/shuvroroy/filament-spatie-laravel-health/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/shuvroroy/filament-spatie-laravel-health.svg?style=flat-square)](https://packagist.org/packages/shuvroroy/filament-spatie-laravel-health)
 
-Filament support for `spatie/laravel-health`.
+This plugin is built on top of [Spatie's Laravel-health](https://spatie.be/docs/laravel-health/v1/introduction) package.
 
-![Health Check Results - Filament Demo](https://user-images.githubusercontent.com/21066418/147694379-cf8dc7d1-056f-4151-a676-21854d6bc59a.png)
-
+![Health Check Results - Filament Demo](https://user-images.githubusercontent.com/21066418/147746698-8a21ab58-1771-4525-9595-0bbcedc6a325.png)
 
 ## Installation
 
