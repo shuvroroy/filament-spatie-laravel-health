@@ -12,7 +12,7 @@ return [
     |
     */
 
-	'resource' => [
+	'page' => [
 		'heading' => null,
 
 		'navigation' => [

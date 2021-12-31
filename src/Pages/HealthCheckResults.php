@@ -32,22 +32,22 @@ class HealthCheckResults extends Page
 
     protected function getHeading(): string
     {
-        return config('filament-spatie-laravel-health.resource.heading') ?? parent::getTitle();
+        return config('filament-spatie-laravel-health.page.heading') ?? parent::getTitle();
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('filament-spatie-laravel-health.resource.navigation.group') ?? parent::getNavigationGroup();
+        return config('filament-spatie-laravel-health.page.navigation.group') ?? parent::getNavigationGroup();
     }
 
     protected static function getNavigationLabel(): string
     {
-        return config('filament-spatie-laravel-health.resource.navigation.label') ?? parent::getNavigationLabel();
+        return config('filament-spatie-laravel-health.page.navigation.label') ?? parent::getNavigationLabel();
     }
 
     protected static function getNavigationSort(): ?int
     {
-        return config('filament-spatie-laravel-health.resource.navigation.sort') ?? parent::getNavigationSort();
+        return config('filament-spatie-laravel-health.page.navigation.sort') ?? parent::getNavigationSort();
     }
 
     protected function getViewData(): array

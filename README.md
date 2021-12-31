@@ -28,8 +28,9 @@ This is the contents of the published config file:
 ```php
 return [
 
-    'resource' => [
+    'page' => [
         'heading' => null,
+
         'navigation' => [
             'group' => null,
             'label' => null,
@@ -46,19 +47,19 @@ This package will automatically register the `HealthCheckResults`. You'll be abl
 
 ## Customising the heading
 
-You can customise the heading for the `HealthCheckResults` by publishing the configuration file and updating the `resource.heading` value.
+You can customise the heading for the `HealthCheckResults` by publishing the configuration file and updating the `page.heading` value.
 
 ## Customising the navigation group
 
-You can customise the navigation group for the `HealthCheckResults` by publishing the configuration file and updating the `resource.navigation.group` value.
+You can customise the navigation group for the `HealthCheckResults` by publishing the configuration file and updating the `page.navigation.group` value.
 
 ## Customising the navigation label
 
-You can customise the navigation label for the `HealthCheckResults` by publishing the configuration file and updating the `resource.navigation.label` value.
+You can customise the navigation label for the `HealthCheckResults` by publishing the configuration file and updating the `page.navigation.label` value.
 
 ## Customising the navigation sorting
 
-You can customise the navigation sort for the `HealthCheckResults` by publishing the configuration file and updating the `resource.navigation.sort` value.
+You can customise the navigation sort for the `HealthCheckResults` by publishing the configuration file and updating the `page.navigation.sort` value.
 
 ## Testing
 
