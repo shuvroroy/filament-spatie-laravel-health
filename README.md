@@ -29,13 +29,12 @@ This is the contents of the published config file:
 return [
 
     'resource' => [
-		'heading' => null,
-
-		'navigation' => [
-			'group' => null,
-			'label' => null,
-	        'sort' => null,
-		],
+        'heading' => null,
+        'navigation' => [
+            'group' => null,
+            'label' => null,
+            'sort' => null,
+        ],
     ],
 
 ];
