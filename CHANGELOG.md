@@ -2,6 +2,10 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.1.1 - 2021-12-31
+
+- update config
+
 ## v1.1.0 - 2021-12-31
 
 - allow page heading customising option
