@@ -13,36 +13,30 @@ class HealthCheckResults extends Page
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
 
-    protected static ?string $navigationGroup = 'Settings';
-
-    protected static ?string $navigationLabel = 'Application Health';
-
     protected static ?string $navigationIcon = 'heroicon-o-heart';
-
-    protected static ?string $title = 'Application Health';
 
     protected static string $view = 'filament-spatie-health::pages.health-check-results';
 
     protected function getActions(): array
     {
         return [
-            ButtonAction::make('Refresh')->action('refresh'),
+            ButtonAction::make(__('filament-spatie-health::filament-spatie-health.refresh'))->action('refresh'),
         ];
     }
 
     protected function getHeading(): string
     {
-        return config('filament-spatie-laravel-health.page.heading') ?? parent::getTitle();
+        return __('filament-spatie-health::filament-spatie-health.heading');
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return config('filament-spatie-laravel-health.page.navigation.group') ?? parent::getNavigationGroup();
+        return __('filament-spatie-health::filament-spatie-health.navigation.group');
     }
 
     protected static function getNavigationLabel(): string
     {
-        return config('filament-spatie-laravel-health.page.navigation.label') ?? parent::getNavigationLabel();
+        return __('filament-spatie-health::filament-spatie-health.navigation.label');
     }
 
     protected static function getNavigationSort(): ?int

@@ -69,10 +69,10 @@
 			@endforeach
 		</dl>
 	@endif
-	
+
 	@if ($lastRanAt)
         <div class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
-            {{ __('health::notifications.check_results_from') }} {{ $lastRanAt->diffForHumans() }}
+            {{ __('filament-spatie-health::filament-spatie-health.notifications.check_results_from') }} {{ $lastRanAt->diffForHumans() }}
         </div>
     @endif
 </x-filament::page>
