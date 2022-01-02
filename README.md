@@ -28,6 +28,16 @@ This is the contents of the published config file:
 ```php
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Page
+    |--------------------------------------------------------------------------
+    |
+    | This is the configuration for the general appearance of the page
+    | in admin panel.
+    |
+    */
+    
     'page' => [
         'heading' => null,
 
