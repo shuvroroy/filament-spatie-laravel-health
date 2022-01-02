@@ -2,6 +2,10 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.2.0 - 2022-01-02
+
+- localization support by @mohamedsabil83
+
 ## v1.1.1 - 2021-12-31
 
 - update config
