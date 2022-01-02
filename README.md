@@ -20,7 +20,7 @@ composer require shuvroroy/filament-spatie-laravel-health
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="filament-spatie-laravel-health"
+php artisan vendor:publish --tag="filament-spatie-health-config"
 ```
 
 This is the contents of the published config file:
@@ -50,18 +50,6 @@ return [
 ## Usage
 
 This package will automatically register the `HealthCheckResults`. You'll be able to see it when you visit your Filament admin panel.
-
-## Customising the heading
-
-You can customise the heading for the `HealthCheckResults` by publishing the configuration file and updating the `page.heading` value.
-
-## Customising the navigation group
-
-You can customise the navigation group for the `HealthCheckResults` by publishing the configuration file and updating the `page.navigation.group` value.
-
-## Customising the navigation label
-
-You can customise the navigation label for the `HealthCheckResults` by publishing the configuration file and updating the `page.navigation.label` value.
 
 ## Customising the navigation sorting
 
