@@ -13,11 +13,7 @@ return [
     */
 
 	'page' => [
-		'heading' => null,
-
 		'navigation' => [
-			'group' => null,
-			'label' => null,
 	        'sort' => null,
 		],
     ],

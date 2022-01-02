@@ -37,13 +37,9 @@ return [
     | in admin panel.
     |
     */
-    
-    'page' => [
-        'heading' => null,
 
+    'page' => [
         'navigation' => [
-            'group' => null,
-            'label' => null,
             'sort' => null,
         ],
     ],

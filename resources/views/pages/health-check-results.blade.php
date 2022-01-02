@@ -36,7 +36,7 @@
 	@if (count($checkResults?->storedCheckResults ?? []))
 		<dl class=" grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			@foreach ($checkResults->storedCheckResults as $result)
-				<div class="flex items-start p-6 space-x-2 overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow">
+				<div class="flex items-start p-6 space-x-2 rtl:space-x-reverse overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow">
 					<div class="flex justify-center items-center rounded-full p-2.5 {{ backgroundColor($result->status) }}">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 {{ iconColor($result->status) }}" viewBox="0 0 20 20" fill="currentColor">
 							@if(icon($result->status) == 'check-circle')
@@ -69,10 +69,10 @@
 			@endforeach
 		</dl>
 	@endif
-	
+
 	@if ($lastRanAt)
         <div class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
-            {{ __('health::notifications.check_results_from') }} {{ $lastRanAt->diffForHumans() }}
+            {{ __('filament-spatie-health::filament-spatie-health.notifications.check_results_from') }} {{ $lastRanAt->diffForHumans() }}
         </div>
     @endif
 </x-filament::page>
