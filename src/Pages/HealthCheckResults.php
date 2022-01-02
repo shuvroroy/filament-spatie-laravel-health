@@ -20,23 +20,23 @@ class HealthCheckResults extends Page
     protected function getActions(): array
     {
         return [
-            ButtonAction::make(__('filament-spatie-health::filament-spatie-health.refresh'))->action('refresh'),
+            ButtonAction::make(__('filament-spatie-health::health.pages.health_check_results.buttons.refresh'))->action('refresh'),
         ];
     }
 
     protected function getHeading(): string
     {
-        return __('filament-spatie-health::filament-spatie-health.heading');
+        return __('filament-spatie-health::health.pages.health_check_results.heading');
     }
 
     protected static function getNavigationGroup(): ?string
     {
-        return __('filament-spatie-health::filament-spatie-health.navigation.group');
+        return __('filament-spatie-health::health.pages.health_check_results.navigation.group');
     }
 
     protected static function getNavigationLabel(): string
     {
-        return __('filament-spatie-health::filament-spatie-health.navigation.label');
+        return __('filament-spatie-health::health.pages.health_check_results.navigation.label');
     }
 
     protected static function getNavigationSort(): ?int

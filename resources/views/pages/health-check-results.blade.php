@@ -72,7 +72,7 @@
 
 	@if ($lastRanAt)
         <div class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-red-400' : 'text-gray-500' }} text-md text-center font-medium">
-            {{ __('filament-spatie-health::filament-spatie-health.notifications.check_results_from') }} {{ $lastRanAt->diffForHumans() }}
+            {{ __('filament-spatie-health::health.pages.health_check_results.notifications.check_results') }} {{ $lastRanAt->diffForHumans() }}
         </div>
     @endif
 </x-filament::page>
