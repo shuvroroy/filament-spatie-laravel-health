@@ -2,6 +2,12 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.3.0 - 2022-01-17
+
+- page register via config file @shuvroroy
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.2.0...v1.3.0
+
 ## v1.2.0 - 2022-01-02
 
 - localization support by @mohamedsabil83
