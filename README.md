@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'page' => [
+    'pages' => [
         'health' => \ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults::class
     ],
 
