@@ -39,11 +39,6 @@ class HealthCheckResults extends Page
         return __('filament-spatie-health::health.pages.health_check_results.navigation.label');
     }
 
-    protected static function getNavigationSort(): ?int
-    {
-        return config('filament-spatie-laravel-health.page.navigation.sort') ?? parent::getNavigationSort();
-    }
-
     protected function getViewData(): array
     {
         $checkResults = (new EloquentHealthResultStore())->latestResults();

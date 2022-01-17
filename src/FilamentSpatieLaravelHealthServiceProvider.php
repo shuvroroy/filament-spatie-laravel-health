@@ -3,7 +3,6 @@
 namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 
 use Filament\PluginServiceProvider;
-use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use Spatie\LaravelPackageTools\Package;
 
 class FilamentSpatieLaravelHealthServiceProvider extends PluginServiceProvider
@@ -19,9 +18,7 @@ class FilamentSpatieLaravelHealthServiceProvider extends PluginServiceProvider
 
     protected function getPages(): array
     {
-        return [
-            HealthCheckResults::class,
-        ];
+        return config('filament-spatie-laravel-health.pages');
     }
 
     protected function getStyles(): array
