@@ -2,6 +2,19 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.4.0 - 2022-02-11
+
+## What's Changed
+
+- Add support for Turkish (tr) translation by @trk in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/3
+- chore: laravel 9 support by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/4
+
+## New Contributors
+
+- @trk made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/3
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.3.1...v1.4.0
+
 ## v1.3.1 - 2022-01-17
 
 **Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.3.0...v1.3.1
