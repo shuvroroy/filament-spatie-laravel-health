@@ -34,9 +34,9 @@
 
 <x-filament::page>
 	@if (count($checkResults?->storedCheckResults ?? []))
-		<dl class=" grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			@foreach ($checkResults->storedCheckResults as $result)
-				<div class="flex items-start p-6 space-x-2 rtl:space-x-reverse overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow">
+				<div class="flex items-start p-6 space-x-2 rtl:space-x-reverse overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow @if(config('filament.dark_mode')) dark:bg-gray-800 @endif">
 					<div class="flex justify-center items-center rounded-full p-2.5 {{ backgroundColor($result->status) }}">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 {{ iconColor($result->status) }}" viewBox="0 0 20 20" fill="currentColor">
 							@if(icon($result->status) == 'check-circle')
@@ -54,10 +54,10 @@
 					</div>
 
 					<div>
-						<dd class="-mt-1 font-semibold text-gray-800 md:mt-1 md:text-xl">
+						<dd class="-mt-1 font-semibold text-gray-800 md:mt-1 md:text-xl @if(config('filament.dark_mode')) dark:text-gray-200 @endif">
 							{{ $result->label }}
 						</dd>
-						<dt class="mt-0 text-sm font-medium text-gray-600 md:mt-1">
+						<dt class="mt-0 text-sm font-medium text-gray-600 md:mt-1 @if(config('filament.dark_mode'))dark:text-gray-400 @endif">
 							@if (!empty($result->notificationMessage))
 								{{ $result->notificationMessage }}
 							@else
