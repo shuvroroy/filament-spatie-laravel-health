@@ -2,6 +2,18 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.4.1 - 2022-02-17
+
+## What's Changed
+
+- Added basic darkmode by @morganchorlton3 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/5
+
+## New Contributors
+
+- @morganchorlton3 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/5
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.4.0...v1.4.1
+
 ## v1.4.0 - 2022-02-11
 
 ## What's Changed
