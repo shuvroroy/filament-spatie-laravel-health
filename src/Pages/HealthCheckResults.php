@@ -55,4 +55,14 @@ class HealthCheckResults extends Page
 
         $this->emitSelf('refreshComponent');
     }
+
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('view_health_check_results');
+    }
+
+    public function mount(): void
+    {
+        abort_unless(auth()->user()->can('view_health_check_results'), 403);
+    }   
 }
