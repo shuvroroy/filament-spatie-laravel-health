@@ -2,6 +2,24 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.4.2 - 2022-08-11
+
+### What's Changed
+
+- chore(deps): bump dependabot/fetch-metadata from 1.1.1 to 1.2.0 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/6
+- chore(deps): bump dependabot/fetch-metadata from 1.2.0 to 1.2.1 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/7
+- chore(deps): bump dependabot/fetch-metadata from 1.2.1 to 1.3.0 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/8
+- chore(deps): bump dependabot/fetch-metadata from 1.3.0 to 1.3.1 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/11
+- chore(deps): bump dependabot/fetch-metadata from 1.3.1 to 1.3.3 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/15
+- chore(deps): bump actions/checkout from 2 to 3 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/9
+- Vietnamese translations by @datlechin in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/17
+
+### New Contributors
+
+- @datlechin made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/17
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.4.1...v1.4.2
+
 ## v1.4.1 - 2022-02-17
 
 ## What's Changed
