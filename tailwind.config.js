@@ -1,12 +1,12 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  corePlugins: {
-    preflight: false,
-  },
-  content: [
-    './resources/**/*.blade.php',
-  ],
+  content: ['./resources/views/**/*.blade.php'],
+  darkMode: 'class',
   theme: {
-    extend: {},
+      extend: {},
+  },
+  corePlugins: {
+      preflight: false,
   },
   plugins: [],
 }
