@@ -2,6 +2,14 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.5.0 - 2022-08-30
+
+### What's Changed
+
+- fix: css style breaking issue by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/19
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.4.2...v1.5.0
+
 ## v1.4.2 - 2022-08-11
 
 ### What's Changed
