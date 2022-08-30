@@ -24,7 +24,7 @@ class FilamentSpatieLaravelHealthServiceProvider extends PluginServiceProvider
     protected function getStyles(): array
     {
         return [
-            self::$name . '-styles' => __DIR__ . '/../dist/app.css',
+            self::$name . '-styles' => __DIR__ . '/../dist/health.css',
         ];
     }
 }
