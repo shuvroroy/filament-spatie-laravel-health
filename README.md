@@ -17,6 +17,13 @@ You can install the package via composer:
 composer require shuvroroy/filament-spatie-laravel-health
 ```
 
+This package can store health check results [in various ways](https://spatie.be/docs/laravel-health/v1/storing-results/general). When using the EloquentHealthResultStore the check results will be stored in the database. To create the health_check_result_history_items table, you must create and run the migration.
+
+```bash
+php artisan vendor:publish --tag="health-migrations"
+php artisan migrate
+```
+
 You can publish the config file with:
 
 ```bash
