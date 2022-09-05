@@ -3,6 +3,7 @@
 namespace ShuvroRoy\FilamentSpatieLaravelHealth\Pages;
 
 use Carbon\Carbon;
+use Filament\Notifications\Notification;
 use Filament\Pages\Actions\ButtonAction;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
@@ -52,6 +53,11 @@ class HealthCheckResults extends Page
     public function refresh(): void
     {
         Artisan::call(RunHealthChecksCommand::class);
+
+        Notification::make()
+            ->title('All done!')
+            ->success()
+            ->send();
 
         $this->emitSelf('refreshComponent');
     }
