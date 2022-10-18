@@ -7,7 +7,7 @@ use Filament\Pages\Actions\ButtonAction;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Health\Commands\RunHealthChecksCommand;
-use Spatie\Health\ResultStores\EloquentHealthResultStore;
+use Spatie\Health\ResultStores\ResultStore;
 
 class HealthCheckResults extends Page
 {
@@ -41,7 +41,7 @@ class HealthCheckResults extends Page
 
     protected function getViewData(): array
     {
-        $checkResults = (new EloquentHealthResultStore())->latestResults();
+        $checkResults = app(ResultStore::class)->latestResults();
 
         return [
             'lastRanAt' => new Carbon($checkResults?->finishedAt),
