@@ -2,6 +2,19 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.6.0 - 2022-10-18
+
+### What's Changed
+
+- chore(deps): bump dependabot/fetch-metadata from 1.3.3 to 1.3.4 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/21
+- Resolve `ResultStore` from the `Container` by @mabdullahsari in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/22
+
+### New Contributors
+
+- @mabdullahsari made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/22
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.5.0...1.6.0
+
 ## v1.5.0 - 2022-08-30
 
 ### What's Changed
