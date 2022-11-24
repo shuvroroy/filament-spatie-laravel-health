@@ -8,6 +8,7 @@ use Filament\Pages\Page;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\ResultStores\ResultStore;
+use Spatie\Health\ResultStores\StoredCheckResults\StoredCheckResult;
 
 class HealthCheckResults extends Page
 {
@@ -41,11 +42,22 @@ class HealthCheckResults extends Page
 
     protected function getViewData(): array
     {
-        $checkResults = app(ResultStore::class)->latestResults();
+
+        $lastsResults = app(ResultStore::class)
+            ->latestResults();
+
+        $storedCheckResults = $lastsResults?->storedCheckResults
+            ->map(function (StoredCheckResult $result) {
+                $result->backgroundColor = $this->getBackgroundColor($result->status);
+                $result->iconColor = $this->getIconColor($result->status);
+                $result->icon = $this->getIcon($result->status);
+
+                return $result;
+            });
 
         return [
-            'lastRanAt' => new Carbon($checkResults?->finishedAt),
-            'checkResults' => $checkResults,
+            'lastRanAt' => new Carbon($lastsResults?->finishedAt),
+            'storedCheckResults' => $storedCheckResults,
         ];
     }
 
@@ -54,5 +66,23 @@ class HealthCheckResults extends Page
         Artisan::call(RunHealthChecksCommand::class);
 
         $this->emitSelf('refreshComponent');
+    }
+
+    protected function getBackgroundColor(string $status): string
+    {
+        $colors = config('filament-spatie-laravel-health.background-colors');
+        return $colors[$status] ?? $colors['default'] ?? '';
+    }
+
+    protected function getIconColor(string $status): string
+    {
+        $colors = config('filament-spatie-laravel-health.icon-colors');
+        return $colors[$status] ?? $colors['default'] ?? '';
+    }
+
+    protected function getIcon(string $status): string
+    {
+        $icons = config('filament-spatie-laravel-health.icons');
+        return $icons[$status] ?? $icons['default'] ?? '';
     }
 }
