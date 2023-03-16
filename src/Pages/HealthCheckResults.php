@@ -58,11 +58,11 @@ class HealthCheckResults extends Page
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('view_health_check_results');
+        return auth()->user()->can('page_HealthCheckResults');
     }
 
     public function mount(): void
     {
-        abort_unless(auth()->user()->can('view_health_check_results'), 403);
+        abort_unless(auth()->user()->can('page_HealthCheckResults'), 403);
     }   
 }
