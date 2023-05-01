@@ -60,6 +60,35 @@ return [
 
 This package will automatically register the `HealthCheckResults`. You'll be able to see it when you visit your Filament admin panel.
 
+## Defining Resources to health check
+
+ Register Health::checks on app/Providers/AppServiceProvider.php -> `boot` method
+
+ ```php
+<?php
+
+namespace App\Providers;
+
+use Spatie\Health\Facades\Health;
+use Spatie\Health\Checks\Checks\OptimizedAppCheck;
+use Spatie\Health\Checks\Checks\DebugModeCheck;
+use Spatie\Health\Checks\Checks\EnvironmentCheck;
+
+class AppServiceProvider extends ServiceProvider
+{
+     public function boot()
+     {
+         Health::checks([
+             OptimizedAppCheck::new(),
+             DebugModeCheck::new(),
+             EnvironmentCheck::new(),
+         ]);
+     }
+ }
+ ```
+
+ Read the full documentation on [Spatie Laravel Health](https://spatie.be/docs/laravel-health/v1/available-checks/overview)
+
 ## Testing
 
 ```bash
