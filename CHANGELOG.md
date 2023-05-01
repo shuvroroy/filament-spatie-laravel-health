@@ -2,6 +2,22 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v1.6.1 - 2023-05-01
+
+### What's Changed
+
+- chore(deps): bump dependabot/fetch-metadata from 1.3.4 to 1.3.5 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/23
+- chore(deps): bump ramsey/composer-install from 1 to 2 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/24
+- chore(deps): bump dependabot/fetch-metadata from 1.3.5 to 1.3.6 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/27
+- chore(deps): bump dependabot/fetch-metadata from 1.3.6 to 1.4.0 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/30
+- lang: Add pt_BR lang support by @joaoprado in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/29
+
+### New Contributors
+
+- @joaoprado made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/29
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/1.6.0...v1.6.1
+
 ## v1.6.0 - 2022-10-18
 
 ### What's Changed
