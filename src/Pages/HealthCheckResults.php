@@ -55,7 +55,7 @@ class HealthCheckResults extends Page
         Artisan::call(RunHealthChecksCommand::class);
 
         Notification::make()
-            ->title('All done!')
+            ->title(trans('All done!'))
             ->success()
             ->send();
 
