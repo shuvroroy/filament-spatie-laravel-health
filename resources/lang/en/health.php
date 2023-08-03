@@ -7,9 +7,9 @@ return [
             'buttons' => [
                 'refresh' => 'Refresh',
             ],
-            
+
             'heading' => 'Application Health',
-            
+
             'navigation' => [
                 'group' => 'Settings',
                 'label' => 'Application Health',

@@ -32,9 +32,9 @@
 	}
 @endphp
 
-<x-filament::page>
+<x-filament-panels::page>
 	@if (count($checkResults?->storedCheckResults ?? []))
-		<dl class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			@foreach ($checkResults->storedCheckResults as $result)
 				<div class="flex items-start p-6 space-x-2 rtl:space-x-reverse overflow-hidden text-opacity-0 transform bg-white rounded-xl shadow @if(config('filament.dark_mode')) dark:bg-gray-800 @endif">
 					<div class="flex justify-center items-center rounded-full p-2.5 {{ backgroundColor($result->status) }}">
@@ -67,7 +67,7 @@
 					</div>
 				</div>
 			@endforeach
-		</dl>
+		</div>
 	@endif
 
 	@if ($lastRanAt)
@@ -75,4 +75,4 @@
             {{ __('filament-spatie-health::health.pages.health_check_results.notifications.check_results') }} {{ $lastRanAt->diffForHumans() }}
         </div>
     @endif
-</x-filament::page>
+</x-filament-panels::page>

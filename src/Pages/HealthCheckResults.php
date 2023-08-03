@@ -3,15 +3,20 @@
 namespace ShuvroRoy\FilamentSpatieLaravelHealth\Pages;
 
 use Carbon\Carbon;
-use Filament\Pages\Actions\ButtonAction;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\ResultStores\ResultStore;
 
 class HealthCheckResults extends Page
 {
-    protected $listeners = ['refreshComponent' => '$refresh'];
+    /**
+     * @var array<string, string>
+     */
+    protected $listeners = ['refresh-component' => '$refresh'];
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
@@ -20,21 +25,23 @@ class HealthCheckResults extends Page
     protected function getActions(): array
     {
         return [
-            ButtonAction::make(__('filament-spatie-health::health.pages.health_check_results.buttons.refresh'))->action('refresh'),
+            Action::make(__('filament-spatie-health::health.pages.health_check_results.buttons.refresh'))
+                ->button()
+                ->action('refresh'),
         ];
     }
 
-    protected function getHeading(): string
+    public function getHeading(): string | Htmlable
     {
         return __('filament-spatie-health::health.pages.health_check_results.heading');
     }
 
-    protected static function getNavigationGroup(): ?string
+    public static function getNavigationGroup(): ?string
     {
         return __('filament-spatie-health::health.pages.health_check_results.navigation.group');
     }
 
-    protected static function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-spatie-health::health.pages.health_check_results.navigation.label');
     }
@@ -53,6 +60,11 @@ class HealthCheckResults extends Page
     {
         Artisan::call(RunHealthChecksCommand::class);
 
-        $this->emitSelf('refreshComponent');
+        $this->dispatch('refresh-component');
+
+        Notification::make()
+            ->title('Health check results refreshed')
+            ->success()
+            ->send();
     }
 }

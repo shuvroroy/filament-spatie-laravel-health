@@ -9,14 +9,14 @@ return [
             ],
 
             'heading' => 'حالة النظام',
-            
+
             'navigation' => [
                 'group' => 'إعدادات',
                 'label' => 'حالة النظام',
             ],
 
             'notifications' => [
-                'check_results' => 'تمت عملية الفحص'
+                'check_results' => 'تمت عملية الفحص',
             ],
         ],
     ],
