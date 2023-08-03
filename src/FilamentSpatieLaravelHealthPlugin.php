@@ -4,22 +4,16 @@ namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
-    protected bool $hasHealthPage = false;
-
-    public function getId(): string
-    {
-        return 'filament-spatie-health';
-    }
+    protected string $page = HealthCheckResults::class;
 
     public function register(Panel $panel): void
     {
         // @phpstan-ignore-next-line
-        $panel->pages([
-            config('filament-spatie-laravel-health.pages.health'),
-        ]);
+        $panel->pages([$this->getPage()]);
     }
 
     public function boot(Panel $panel): void
@@ -27,20 +21,25 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         //
     }
 
-    public function healthPage(bool $condition = true): static
+    public function getId(): string
     {
-        $this->hasHealthPage = $condition;
-
-        return $this;
-    }
-
-    public function hasHealthPage(): bool
-    {
-        return $this->hasHealthPage;
+        return 'filament-spatie-health';
     }
 
     public static function make(): static
     {
-        return app(static::class);
+        return new static();
+    }
+
+    public function usingPage(string $page): static
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    public function getPage(): string
+    {
+        return $this->page;
     }
 }
