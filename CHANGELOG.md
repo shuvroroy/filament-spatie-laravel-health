@@ -2,6 +2,19 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.0.0 - 2023-08-04
+
+### What's Changed
+
+- Georgian Transaltion by @ngfw in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/33
+- Support v3 by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/37
+
+### New Contributors
+
+- @ngfw made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/33
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v1.6.1...v2.0.0
+
 ## v1.6.1 - 2023-05-01
 
 ### What's Changed
