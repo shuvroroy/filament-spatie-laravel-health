@@ -1,12 +1,9 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./resources/views/**/*.blade.php'],
-  darkMode: 'class',
-  theme: {
-      extend: {},
-  },
-  corePlugins: {
+    content: ["./resources/views/**/*.blade.php"],
+    darkMode: "class",
+    important: ".filament-spatie-health",
+    plugins: [],
+    corePlugins: {
       preflight: false,
-  },
-  plugins: [],
-}
+    }
+};

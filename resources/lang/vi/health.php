@@ -7,9 +7,9 @@ return [
             'buttons' => [
                 'refresh' => 'Làm mới',
             ],
-            
+
             'heading' => 'Tình trạng ứng dụng',
-            
+
             'navigation' => [
                 'group' => 'Cài đặt',
                 'label' => 'Tình trạng ứng dụng',

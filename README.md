@@ -29,32 +29,23 @@ php artisan vendor:publish --tag="health-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
+Publish the package's assets:
 
 ```bash
-php artisan vendor:publish --tag="filament-spatie-health-config"
+php artisan filament:assets
 ```
 
-This is the contents of the published config file:
+## Configuring the panel with a plugin class
+
+The users of your plugin can add it to a panel by instantiating the plugin class and passing it to the plugin() method of the [configuration](https://filamentphp.com/docs/3.x/panels/configuration):
 
 ```php
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Pages
-    |--------------------------------------------------------------------------
-    |
-    | This is the configuration for the general appearance of the page
-    | in admin panel.
-    |
-    */
-
-    'pages' => [
-        'health' => \ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults::class
-    ],
-
-];
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        // ...
+        ->plugin(new HealthCheckResults());
+}
 ```
 
 ## Usage
@@ -63,7 +54,29 @@ This package will automatically register the `HealthCheckResults`. You'll be abl
 
 ## Defining Resources to health check
 
- Register Health::checks on app/Providers/AppServiceProvider.php -> `boot` method
+You first need to register the plugin with Filament. This can be done inside of your `PanelProvider`, e.g. `AdminPanelProvider`.
+
+ ```php
+<?php
+
+namespace App\Providers\Filament;
+
+use Filament\Panel;
+use Filament\PanelProvider;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            // ...
+            ->plugin(HealthCheckResults::make());
+    }
+}
+```
+
+Then register Health::checks on app/Providers/AppServiceProvider.php -> `boot` method
 
  ```php
 <?php
@@ -77,7 +90,7 @@ use Spatie\Health\Checks\Checks\EnvironmentCheck;
 
 class AppServiceProvider extends ServiceProvider
 {
-     public function boot()
+     public function boot(): void
      {
          Health::checks([
              OptimizedAppCheck::new(),
@@ -88,7 +101,57 @@ class AppServiceProvider extends ServiceProvider
  }
  ```
 
- Read the full documentation on [Spatie Laravel Health](https://spatie.be/docs/laravel-health/v1/available-checks/overview)
+Read the full documentation on [Spatie Laravel Health](https://spatie.be/docs/laravel-health/v1/available-checks/overview)
+
+If you want to override the default `HealthCheckResults` page icon, heading then you can extend the page class and override the `navigationIcon` property and `getHeading` method and so on.
+
+```php
+<?php
+
+namespace App\Filament\Pages;
+
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults as BaseHealthCheckResults;
+
+class HealthCheckResults extends BaseHealthCheckResults
+{
+    protected static ?string $navigationIcon = 'heroicon-o-cpu-chip';
+
+    public function getHeading(): string | Htmlable
+    {
+        return 'Health Check Results'
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Core';
+    }
+}
+```
+Then register the extended page class on `AdminPanelProvider` class.
+
+```php
+<?php
+
+namespace App\Providers\Filament;
+
+use Filament\Panel;
+use Filament\PanelProvider;
+use App\Filament\Pages\HealthCheckResults;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            // ...
+            ->plugin(
+                HealthCheckResults::make()
+                    ->usingPage(HealthCheckResults::class)
+            );
+    }
+}
+```
+
 
 ## Testing
 

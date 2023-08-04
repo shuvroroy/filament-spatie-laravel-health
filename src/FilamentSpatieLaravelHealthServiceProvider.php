@@ -2,29 +2,25 @@
 
 namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 
-use Filament\PluginServiceProvider;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentSpatieLaravelHealthServiceProvider extends PluginServiceProvider
+class FilamentSpatieLaravelHealthServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-spatie-health';
-
     public function configurePackage(Package $package): void
     {
-        parent::configurePackage($package);
-
-        $package->hasConfigFile('filament-spatie-laravel-health');
+        $package
+            ->name('filament-spatie-health')
+            ->hasTranslations()
+            ->hasViews();
     }
 
-    protected function getPages(): array
+    public function packageBooted(): void
     {
-        return config('filament-spatie-laravel-health.pages');
-    }
-
-    protected function getStyles(): array
-    {
-        return [
-            self::$name . '-styles' => __DIR__ . '/../dist/health.css',
-        ];
+        FilamentAsset::register([
+            Css::make('filament-spatie-health-styles', __DIR__ . '/../resources/dist/plugin.css'),
+        ], 'filament-spatie-health');
     }
 }
