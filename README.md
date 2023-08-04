@@ -35,24 +35,7 @@ Publish the package's assets:
 php artisan filament:assets
 ```
 
-## Configuring the panel with a plugin class
-
-The users of your plugin can add it to a panel by instantiating the plugin class and passing it to the plugin() method of the [configuration](https://filamentphp.com/docs/3.x/panels/configuration):
-
-```php
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        // ...
-        ->plugin(new HealthCheckResults());
-}
-```
-
 ## Usage
-
-This package will automatically register the `HealthCheckResults`. You'll be able to see it when you visit your Filament admin panel.
-
-## Defining Resources to health check
 
 You first need to register the plugin with Filament. This can be done inside of your `PanelProvider`, e.g. `AdminPanelProvider`.
 
