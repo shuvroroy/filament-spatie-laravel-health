@@ -2,7 +2,7 @@
 
 ## Upgrading from v1.x to v2.0
 
-Starting with version v1.0, this package now only supports Filament v3.x.
+Starting with version v2.0, this package now only supports Filament v3.x.
 
 Follow these steps to update the package for Filament v3.x.
 
