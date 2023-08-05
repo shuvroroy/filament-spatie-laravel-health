@@ -36,25 +36,7 @@ class AdminPanelProvider extends PanelProvider
 php artisan filament:assets
 ```
 
-5. Open your panel and check that the resource has been registered and existing navigation menus are showing.
-
-If you have registered custom navigation item types, the `addItemType()` method no longer exists.
-
-Instead, register the item types on the `FilamentNavigation` plugin object directly.
-
-```php
-return $panel
-    ->plugin(
-        FilamentNavigation::make()
-            ->itemType('post', [
-                Select::make('post_id')
-                    ->//...
-            ])
-    )
-    // ...
-```
-
-If you previously used the configuration file to change the `health` value, those no longer exist and need to be updated to method calls on the plugin object.
+5. If you previously used the configuration file to change the `health` value, those no longer exist and need to be updated to method calls on the plugin object.
 
 ```php
 <?php
