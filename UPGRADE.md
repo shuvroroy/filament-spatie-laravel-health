@@ -46,6 +46,7 @@ namespace App\Providers\Filament;
 use Filament\Panel;
 use Filament\PanelProvider;
 use App\Filament\Pages\HealthCheckResults;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -54,7 +55,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             // ...
             ->plugin(
-                HealthCheckResults::make()
+                FilamentSpatieLaravelHealthPlugin::make()
                     ->usingPage(HealthCheckResults::class)
             );
     }
