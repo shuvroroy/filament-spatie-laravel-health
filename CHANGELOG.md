@@ -2,6 +2,27 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.1.0 - 2024-07-27
+
+### What's Changed
+
+* Fix view functions redeclaration. by @mxm1070 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/51
+* Slovak translation by @hamrak in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/50
+* add lang pt_PT by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/48
+* add lang ja by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/47
+* add lang nl by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/46
+* add lang ru by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/45
+* add lang it by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/44
+* add lang fr by @maxime9446 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/43
+
+### New Contributors
+
+* @mxm1070 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/51
+* @hamrak made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/50
+* @maxime9446 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/48
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.0.1...v2.1.0
+
 ## v2.0.1 - 2023-10-30
 
 ### What's Changed
