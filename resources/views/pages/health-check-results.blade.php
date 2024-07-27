@@ -1,35 +1,41 @@
 @php
-	function backgroundColor($status) {
-		return match ($status) {
-			Spatie\Health\Enums\Status::ok()->value => 'bg-emerald-100',
-			Spatie\Health\Enums\Status::warning()->value => 'bg-yellow-100',
-			Spatie\Health\Enums\Status::skipped()->value => 'bg-blue-100',
-			Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'bg-red-100',
-			default => 'bg-gray-100'
-		};
-	}
+    if(! function_exists('backgroundColor')) {
+        function backgroundColor($status) {
+            return match ($status) {
+                Spatie\Health\Enums\Status::ok()->value => 'bg-emerald-100',
+                Spatie\Health\Enums\Status::warning()->value => 'bg-yellow-100',
+                Spatie\Health\Enums\Status::skipped()->value => 'bg-blue-100',
+                Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'bg-red-100',
+                default => 'bg-gray-100'
+            };
+        }
+    }
 
-	function iconColor($status)
-	{
-		return match ($status) {
-			Spatie\Health\Enums\Status::ok()->value => 'text-emerald-500',
-			Spatie\Health\Enums\Status::warning()->value => 'text-yellow-500',
-			Spatie\Health\Enums\Status::skipped()->value => 'text-blue-500',
-			Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'text-red-500',
-			default => 'text-gray-500'
-		};
-	}
+    if(! function_exists('iconColor')) {
+        function iconColor($status)
+        {
+            return match ($status) {
+                Spatie\Health\Enums\Status::ok()->value => 'text-emerald-500',
+                Spatie\Health\Enums\Status::warning()->value => 'text-yellow-500',
+                Spatie\Health\Enums\Status::skipped()->value => 'text-blue-500',
+                Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'text-red-500',
+                default => 'text-gray-500'
+            };
+        }
+    }
 
-	function icon($status)
-	{
-		return match ($status) {
-			Spatie\Health\Enums\Status::ok()->value => 'check-circle',
-			Spatie\Health\Enums\Status::warning()->value => 'exclamation-circle',
-			Spatie\Health\Enums\Status::skipped()->value => 'arrow-circle-right',
-			Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'x-circle',
-			default => ''
-		};
-	}
+    if(! function_exists('icon')) {
+        function icon($status)
+        {
+            return match ($status) {
+                Spatie\Health\Enums\Status::ok()->value => 'check-circle',
+                Spatie\Health\Enums\Status::warning()->value => 'exclamation-circle',
+                Spatie\Health\Enums\Status::skipped()->value => 'arrow-circle-right',
+                Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'x-circle',
+                default => ''
+            };
+        }
+    }
 @endphp
 
 <x-filament-panels::page>
