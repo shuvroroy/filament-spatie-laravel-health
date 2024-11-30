@@ -38,6 +38,11 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return true === $this->evaluate($this->authorizeUsing);
     }
 
+    public static function get(): string
+    {
+        return filament(app(static::class)->getId());
+    }
+
     public function getId(): string
     {
         return 'filament-spatie-health';
