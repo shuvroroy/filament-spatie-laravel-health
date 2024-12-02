@@ -97,7 +97,7 @@ class HealthCheckResults extends BaseHealthCheckResults
 
     public function getHeading(): string | Htmlable
     {
-        return 'Health Check Results'
+        return 'Health Check Results';
     }
 
     public static function getNavigationGroup(): ?string
