@@ -10,7 +10,7 @@ use Filament\Support\Concerns\EvaluatesClosures;
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
     use EvaluatesClosures;
-    
+
     protected bool | \Closure $authorizeUsing = true;
 
     protected string $page = HealthCheckResults::class;
@@ -46,6 +46,11 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->evaluate($this->authorizeUsing) === true;
     }
 
+    public static function get(): static
+    {
+        return filament(app(static::class)->getId());
+    }
+
     public function getId(): string
     {
         return 'filament-spatie-health';
@@ -54,11 +59,6 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     public static function make(): static
     {
         return new static();
-    }
-
-    public static function get(): static
-    {
-        return filament(app(static::class)->getId());
     }
 
     public function usingPage(string $page): static
