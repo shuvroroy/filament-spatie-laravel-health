@@ -19,8 +19,6 @@ class HealthCheckResults extends Page
      */
     protected $listeners = ['refresh-component' => '$refresh'];
 
-    protected static ?string $navigationIcon = 'heroicon-o-heart';
-
     protected static string $view = 'filament-spatie-health::pages.health-check-results';
 
     protected function getActions(): array
@@ -39,12 +37,22 @@ class HealthCheckResults extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return __('filament-spatie-health::health.pages.health_check_results.navigation.group');
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationGroup() ?? __('filament-spatie-health::health.pages.health_check_results.navigation.group');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('filament-spatie-health::health.pages.health_check_results.navigation.label');
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationLabel() ?? __('filament-spatie-health::health.pages.health_check_results.navigation.label');
+    }
+
+    public static function getNavigationSort(): ?int
+    {
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationSort();
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationIcon();
     }
 
     protected function getViewData(): array
@@ -64,7 +72,7 @@ class HealthCheckResults extends Page
         $this->dispatch('refresh-component');
 
         Notification::make()
-            ->title('Health check results refreshed')
+            ->title(__('filament-spatie-health::health.pages.health_check_results.notifications.results_refreshed'))
             ->success()
             ->send();
     }
