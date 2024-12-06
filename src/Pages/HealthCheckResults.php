@@ -8,9 +8,9 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Artisan;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\ResultStores\ResultStore;
-use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 
 class HealthCheckResults extends Page
 {

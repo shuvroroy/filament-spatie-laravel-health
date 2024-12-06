@@ -4,14 +4,14 @@ namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use Filament\Support\Concerns\EvaluatesClosures;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
     use EvaluatesClosures;
 
-    protected bool|\Closure $authorizeUsing = true;
+    protected bool | \Closure $authorizeUsing = true;
 
     protected string $page = HealthCheckResults::class;
 
@@ -26,7 +26,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         //
     }
 
-    public function authorize(bool|\Closure $callback = true): static
+    public function authorize(bool | \Closure $callback = true): static
     {
         $this->authorizeUsing = $callback;
 
@@ -35,7 +35,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function isAuthorized(): bool
     {
-        return true === $this->evaluate($this->authorizeUsing);
+        return $this->evaluate($this->authorizeUsing) === true;
     }
 
     public static function get(): static
@@ -50,7 +50,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public static function make(): static
     {
-        return new static();
+        return new static;
     }
 
     public function usingPage(string $page): static
