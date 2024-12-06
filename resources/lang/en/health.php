@@ -16,7 +16,8 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Check results from',
+                'check_results' => 'Check results from :lastRanAt',
+                'results_refreshed' => 'Health check results refreshed',
             ],
         ],
     ],
