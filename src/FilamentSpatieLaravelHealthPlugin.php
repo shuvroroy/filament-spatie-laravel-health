@@ -10,8 +10,8 @@ use Filament\Support\Concerns\EvaluatesClosures;
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
     use EvaluatesClosures;
-
-    protected bool|\Closure $authorizeUsing = true;
+    
+    protected bool | \Closure $authorizeUsing = true;
 
     protected string $page = HealthCheckResults::class;
 
@@ -34,7 +34,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         //
     }
 
-    public function authorize(bool|\Closure $callback = true): static
+    public function authorize(bool | \Closure $callback = true): static
     {
         $this->authorizeUsing = $callback;
 
@@ -43,7 +43,34 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function isAuthorized(): bool
     {
-        return true === $this->evaluate($this->authorizeUsing);
+        return $this->evaluate($this->authorizeUsing) === true;
+    }
+
+    public function getId(): string
+    {
+        return 'filament-spatie-health';
+    }
+
+    public static function make(): static
+    {
+        return new static();
+    }
+
+    public static function get(): static
+    {
+        return filament(app(static::class)->getId());
+    }
+
+    public function usingPage(string $page): static
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    public function getPage(): string
+    {
+        return $this->page;
     }
 
     public function navigationGroup(string|\Closure|null $navigationGroup): static
@@ -92,33 +119,5 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     public function getNavigationLabel(): string
     {
         return $this->evaluate($this->navigationLabel) ?? __('filament-spatie-health::health.navigation.label');
-    }
-
-    public function getId(): string
-    {
-        return 'filament-spatie-health';
-    }
-
-    public static function make(): static
-    {
-        return new static();
-    }
-
-    public static function get(): static
-    {
-        // @phpstan-ignore-next-line
-        return filament(app(static::class)->getId());
-    }
-
-    public function usingPage(string $page): static
-    {
-        $this->page = $page;
-
-        return $this;
-    }
-
-    public function getPage(): string
-    {
-        return $this->page;
     }
 }
