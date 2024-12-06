@@ -2,6 +2,20 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.2.0 - 2024-12-06
+
+### What's Changed
+
+* Added missing semicolon to README.md example by @chrisreedio in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/55
+* added authorize method  by @phpust in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/52
+
+### New Contributors
+
+* @chrisreedio made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/55
+* @phpust made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/52
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.1.0...v2.2.0
+
 ## v2.1.0 - 2024-07-27
 
 ### What's Changed
