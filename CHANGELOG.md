@@ -2,6 +2,14 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.3.0 - 2024-12-27
+
+### What's Changed
+
+* added some new options + lang file by @phpust in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/58
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.2.0...v2.3.0
+
 ## v2.2.0 - 2024-12-06
 
 ### What's Changed
