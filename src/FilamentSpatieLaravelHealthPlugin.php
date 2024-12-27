@@ -5,7 +5,6 @@ namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
-use Filament\Support\Concerns\EvaluatesClosures;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 
 class FilamentSpatieLaravelHealthPlugin implements Plugin
