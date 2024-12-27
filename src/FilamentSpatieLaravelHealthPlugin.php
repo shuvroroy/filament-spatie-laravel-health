@@ -5,8 +5,8 @@ namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
-use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use Filament\Support\Concerns\EvaluatesClosures;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
@@ -16,13 +16,13 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     protected string $page = HealthCheckResults::class;
 
-    protected string|\Closure|null $navigationGroup = null;
+    protected string | \Closure | null $navigationGroup = null;
 
-    protected int|\Closure $navigationSort = 1;
+    protected int | \Closure $navigationSort = 1;
 
-    protected string|\Closure $navigationIcon = 'heroicon-o-heart';
+    protected string | \Closure $navigationIcon = 'heroicon-o-heart';
 
-    protected string|\Closure|null $navigationLabel = null;
+    protected string | \Closure | null $navigationLabel = null;
 
     public function register(Panel $panel): void
     {
@@ -74,7 +74,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->page;
     }
 
-    public function navigationGroup(string|\Closure|null $navigationGroup): static
+    public function navigationGroup(string | \Closure | null $navigationGroup): static
     {
         $this->navigationGroup = $navigationGroup;
 
@@ -86,7 +86,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->evaluate($this->navigationGroup) ?? __('filament-spatie-health::health.navigation.group');
     }
 
-    public function navigationSort(int|\Closure $navigationSort): static
+    public function navigationSort(int | \Closure $navigationSort): static
     {
         $this->navigationSort = $navigationSort;
 
@@ -98,7 +98,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->evaluate($this->navigationSort);
     }
 
-    public function navigationIcon(string|\Closure $navigationIcon): static
+    public function navigationIcon(string | \Closure $navigationIcon): static
     {
         $this->navigationIcon = $navigationIcon;
 
@@ -110,7 +110,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->evaluate($this->navigationIcon);
     }
 
-    public function navigationLabel(string|\Closure|null $navigationLabel): static
+    public function navigationLabel(string | \Closure | null $navigationLabel): static
     {
         $this->navigationLabel = $navigationLabel;
 
