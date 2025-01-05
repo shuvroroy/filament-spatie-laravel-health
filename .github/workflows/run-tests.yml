@@ -9,6 +9,11 @@ on:
       - 'composer.json'
       - 'composer.lock'
 
+  pull_request:
+    types:
+      - synchronize
+      - ready_for_review
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}

@@ -7,6 +7,11 @@ on:
       - 'phpstan.neon.dist'
       - '.github/workflows/phpstan.yml'
 
+  pull_request:
+    types:
+      - synchronize
+      - ready_for_review
+
 jobs:
   phpstan:
     name: phpstan
