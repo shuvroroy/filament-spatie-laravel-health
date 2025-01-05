@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'تنظیمات',
+        'label' => 'سلامت‌برنامه',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'سلامت‌برنامه',
-
-            'navigation' => [
-                'group' => 'تنظیمات',
-                'label' => 'سلامت‌برنامه',
-            ],
 
             'notifications' => [
                 'check_results' => 'بررسی نتایج از',

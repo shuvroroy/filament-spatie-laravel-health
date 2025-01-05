@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'პარამეტრები',
+        'label' => 'სერვერის ჯანმრთელობა',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'აპლიკაციის სტატუსი',
-
-            'navigation' => [
-                'group' => 'პარამეტრები',
-                'label' => 'სერვერის ჯანმრთელობა',
-            ],
 
             'notifications' => [
                 'check_results' => 'ბოლოს შემოწმდა:',

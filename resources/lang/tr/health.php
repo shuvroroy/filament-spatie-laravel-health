@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'Ayarlar',
+        'label' => 'Uygulama Sağlığı',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'Uygulama Sağlığı',
-
-            'navigation' => [
-                'group' => 'Ayarlar',
-                'label' => 'Uygulama Sağlığı',
-            ],
 
             'notifications' => [
                 'check_results' => 'Sonuçları kontrol et.',

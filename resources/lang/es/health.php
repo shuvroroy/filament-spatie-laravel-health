@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'Configuración',
+        'label' => 'Salud de la aplicación',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'Salud de la aplicación',
-
-            'navigation' => [
-                'group' => 'Configuración',
-                'label' => 'Salud de la aplicación',
-            ],
 
             'notifications' => [
                 'check_results' => 'Revisar resultados desde',

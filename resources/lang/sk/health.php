@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'Nastavenia',
+        'label' => 'Stav aplikácie',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'Stav aplikácie',
-
-            'navigation' => [
-                'group' => 'Nastavenia',
-                'label' => 'Stav aplikácie',
-            ],
 
             'notifications' => [
                 'check_results' => 'Skontrolovať výsledky od',

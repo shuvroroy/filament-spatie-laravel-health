@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'Settings',
+        'label' => 'Application Health',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'Application Health',
-
-            'navigation' => [
-                'group' => 'Settings',
-                'label' => 'Application Health',
-            ],
 
             'notifications' => [
                 'check_results' => 'Check results from :lastRanAt',

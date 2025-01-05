@@ -37,12 +37,12 @@ class HealthCheckResults extends Page
 
     public static function getNavigationGroup(): ?string
     {
-        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationGroup() ?? __('filament-spatie-health::health.pages.health_check_results.navigation.group');
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationGroup();
     }
 
     public static function getNavigationLabel(): string
     {
-        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationLabel() ?? __('filament-spatie-health::health.pages.health_check_results.navigation.label');
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationLabel();
     }
 
     public static function getNavigationSort(): ?int

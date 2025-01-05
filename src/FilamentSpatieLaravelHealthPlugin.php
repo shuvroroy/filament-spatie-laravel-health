@@ -48,7 +48,10 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public static function get(): static
     {
-        return filament(app(static::class)->getId());
+        /** @var static $instance */
+        $instance = filament(app(static::class)->getId());
+
+        return $instance;
     }
 
     public function getId(): string
@@ -80,9 +83,17 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this;
     }
 
-    public function getNavigationGroup(): string
+    public function getNavigationGroup(): ?string
     {
-        return $this->evaluate($this->navigationGroup) ?? __('filament-spatie-health::health.navigation.group');
+        if ($this->navigationGroup === null) {
+            if (app('translator')->has('filament-spatie-health::health.pages.navigation.group')) {
+                return __('filament-spatie-health::health.pages.navigation.group');
+            }
+
+            return __('filament-spatie-health::health.navigation.group');
+        }
+
+        return $this->evaluate($this->navigationGroup);
     }
 
     public function navigationSort(int | \Closure $navigationSort): static
@@ -118,6 +129,16 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function getNavigationLabel(): string
     {
-        return $this->evaluate($this->navigationLabel) ?? __('filament-spatie-health::health.navigation.label');
+        $navigationLabel = $this->evaluate($this->navigationLabel);
+
+        if ($navigationLabel) {
+            return $navigationLabel;
+        }
+
+        if (app('translator')->has('filament-spatie-health::health.pages.navigation.label')) {
+            return __('filament-spatie-health::health.pages.navigation.label');
+        }
+
+        return __('filament-spatie-health::health.navigation.label');
     }
 }

@@ -2,6 +2,11 @@
 
 return [
 
+    'navigation' => [
+        'group' => 'Paramètres',
+        'label' => 'Santé de l\'application',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -9,11 +14,6 @@ return [
             ],
 
             'heading' => 'Santé de l\'application',
-
-            'navigation' => [
-                'group' => 'Paramètres',
-                'label' => 'Santé de l\'application',
-            ],
 
             'notifications' => [
                 'check_results' => 'Résultats des vérifications à partir de',
