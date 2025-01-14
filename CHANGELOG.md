@@ -2,6 +2,19 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.3.3 - 2025-01-14
+
+### What's Changed
+
+* Fix Dutch translations by @SanderMuller in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/64
+* Make PHPStan pass again by @SanderMuller in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/67
+
+### New Contributors
+
+* @SanderMuller made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/64
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.3.2...v2.3.3
+
 ## v2.3.2 - 2025-01-14
 
 ### What's Changed
