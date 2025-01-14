@@ -16,7 +16,8 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Controleer resultaten van',
+                'check_results' => 'Gezondheidschecks resultaten van :lastRanAt',
+                'results_refreshed' => 'Gezondheidschecks resultaten zijn vernieuwd',
             ],
         ],
     ],
