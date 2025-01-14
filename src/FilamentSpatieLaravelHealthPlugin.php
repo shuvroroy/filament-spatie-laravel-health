@@ -13,6 +13,8 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     protected bool | \Closure $authorizeUsing = true;
 
+    protected bool $navigationGroupSet = false;
+
     protected string $page = HealthCheckResults::class;
 
     protected string | \Closure | null $navigationGroup = null;
@@ -79,17 +81,20 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     public function navigationGroup(string | \Closure | null $navigationGroup): static
     {
         $this->navigationGroup = $navigationGroup;
+        $this->navigationGroupSet = true;
 
         return $this;
     }
 
     public function getNavigationGroup(): ?string
     {
-        if ($this->navigationGroup === null) {
+        $navigationGroup = $this->evaluate($this->navigationGroup);
+
+        if ($navigationGroup === null && $this->navigationGroupSet === false) {
             return __('filament-spatie-health::health.pages.navigation.group');
         }
 
-        return $this->evaluate($this->navigationGroup);
+        return $navigationGroup;
     }
 
     public function navigationSort(int | \Closure $navigationSort): static
