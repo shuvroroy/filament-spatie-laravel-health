@@ -2,6 +2,18 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.3.2 - 2025-01-14
+
+### What's Changed
+
+* feat: add Indonesian language support for health check results by @cuinc99 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/66
+
+### New Contributors
+
+* @cuinc99 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/66
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.3.1...v2.3.2
+
 ## v2.3.1 - 2024-12-28
 
 ### What's Changed
