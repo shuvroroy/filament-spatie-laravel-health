@@ -48,7 +48,10 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public static function get(): static
     {
-        return filament(app(static::class)->getId());
+        /** @var static $instance */
+        $instance = filament(app(static::class)->getId());
+
+        return $instance;
     }
 
     public function getId(): string
@@ -80,9 +83,13 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this;
     }
 
-    public function getNavigationGroup(): string
+    public function getNavigationGroup(): ?string
     {
-        return $this->evaluate($this->navigationGroup) ?? __('filament-spatie-health::health.pages.navigation.group');
+        if ($this->navigationGroup === null) {
+            return __('filament-spatie-health::health.pages.navigation.group');
+        }
+
+        return $this->evaluate($this->navigationGroup);
     }
 
     public function navigationSort(int | \Closure $navigationSort): static
