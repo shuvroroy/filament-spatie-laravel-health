@@ -91,7 +91,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         $navigationGroup = $this->evaluate($this->navigationGroup);
 
         if ($navigationGroup === null && $this->navigationGroupSet === false) {
-            return __('filament-spatie-health::health.pages.navigation.group');
+            return __('filament-spatie-health::health.pages.health_check_results.navigation.group');
         }
 
         return $navigationGroup;
@@ -130,6 +130,6 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function getNavigationLabel(): string
     {
-        return $this->evaluate($this->navigationLabel) ?? __('filament-spatie-health::health.pages.navigation.label');
+        return $this->evaluate($this->navigationLabel) ?? __('filament-spatie-health::health.pages.health_check_results.navigation.label');
     }
 }
