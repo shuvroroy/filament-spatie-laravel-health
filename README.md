@@ -132,6 +132,34 @@ class AdminPanelProvider extends PanelProvider
 }
 ```
 
+## Customising who can access the page
+
+You can customise who can access the `Hleath` page by adding an `authorize` method to the plugin.
+The method should return a boolean indicating whether the user is authorised to access the page.
+
+```php
+<?php
+
+namespace App\Providers\Filament;
+
+use Filament\Panel;
+use Filament\PanelProvider;
+use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            // ...
+            ->plugin(
+                FilamentSpatieLaravelHealthPlugin::make()
+                     ->authorize(fn (): bool => auth()->user()->email === 'admin@example.com'),
+            );
+    }
+}
+```
+
 ## Upgrading
 
 Please see [UPGRADE](UPGRADE.md) for details on how to upgrade 1.X to 2.0.
