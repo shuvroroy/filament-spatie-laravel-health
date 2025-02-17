@@ -17,6 +17,7 @@ return [
 
             'notifications' => [
                 'check_results' => 'Ver resultados de verificação',
+                'results_refreshed' => 'Resultados da verificação de saúde atualizados',
             ],
         ],
     ],
