@@ -2,6 +2,21 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.3.5 - 2025-02-17
+
+### What's Changed
+
+* Document the authorize method by @SanderMuller in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/69
+* chore(deps): bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/70
+* chore(deps): bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/71
+* Update health.php pt_BR by @samuelterra22 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/72
+
+### New Contributors
+
+* @samuelterra22 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/72
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.3.4...v2.3.5
+
 ## v2.3.4 - 2025-01-15
 
 ### What's Changed
