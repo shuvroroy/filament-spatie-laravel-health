@@ -16,7 +16,7 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Controlla i risultati da',
+                'check_results' => 'Controlla i risultati da :lastRanAt',
             ],
         ],
     ],
