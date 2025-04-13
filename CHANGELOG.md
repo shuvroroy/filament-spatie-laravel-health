@@ -2,6 +2,20 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v2.3.6 - 2025-04-13
+
+### What's Changed
+
+* Updated health.php translation and health-check-results.blade.php css by @panservicesas in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/73
+* Fixing French translations by @azorgh in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/74
+
+### New Contributors
+
+* @panservicesas made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/73
+* @azorgh made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/74
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.3.5...v2.3.6
+
 ## v2.3.5 - 2025-02-17
 
 ### What's Changed
