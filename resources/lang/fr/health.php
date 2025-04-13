@@ -16,7 +16,8 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Résultats des vérifications à partir de',
+                'check_results' => 'Résultats des vérifications :lastRanAt',
+                'results_refreshed' => 'Les résultats du contrôle de santé ont été rafraîchis',
             ],
         ],
     ],
