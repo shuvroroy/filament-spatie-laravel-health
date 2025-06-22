@@ -1,12 +1,13 @@
 {
     "private": true,
     "devDependencies": {
-        "laravel-mix": "^6.0.49",
-        "tailwindcss": "^3.0.24"
+        "@tailwindcss/cli": "^4.1.10",
+        "@tailwindcss/postcss": "^4.1.10",
+        "tailwindcss": "^4.1.10"
     },
     "scripts": {
-        "dev": "mix",
-        "watch": "mix watch",
-        "prod": "mix --production"
+        "dev": "npx @tailwindcss/cli -i ./resources/css/plugin.css -o ./resources/dist/plugin.css --watch",
+        "watch": "npx @tailwindcss/cli -i ./resources/css/plugin.css -o ./resources/dist/plugin.css --watch",
+        "prod": "npx @tailwindcss/cli -i ./resources/css/plugin.css -o ./resources/dist/plugin.css --minify"
     }
 }

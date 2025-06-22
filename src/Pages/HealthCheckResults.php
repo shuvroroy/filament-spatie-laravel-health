@@ -19,7 +19,7 @@ class HealthCheckResults extends Page
      */
     protected $listeners = ['refresh-component' => '$refresh'];
 
-    protected static string $view = 'filament-spatie-health::pages.health-check-results';
+    protected string $view = 'filament-spatie-health::pages.health-check-results';
 
     protected function getActions(): array
     {
