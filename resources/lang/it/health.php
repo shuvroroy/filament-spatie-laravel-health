@@ -8,15 +8,16 @@ return [
                 'refresh' => 'Aggiorna',
             ],
 
-            'heading' => 'Salute dell\'Applicazione',
+            'heading' => "Salute dell'Applicazione",
 
             'navigation' => [
                 'group' => 'Impostazioni',
-                'label' => 'Salute dell\'Applicazione',
+                'label' => "Salute dell'Applicazione",
             ],
 
             'notifications' => [
-                'check_results' => 'Controlla i risultati da :lastRanAt',
+                'check_results' => 'Ultima verifica :lastRanAt',
+                'results_refreshed' => 'Risultati Health Check aggiornati',
             ],
         ],
     ],
