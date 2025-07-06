@@ -20,7 +20,7 @@ class FilamentSpatieLaravelHealthServiceProvider extends PackageServiceProvider
     public function packageBooted(): void
     {
         FilamentAsset::register([
-            Css::make('filament-spatie-health-styles', __DIR__ . '/../resources/dist/plugin.css'),
-        ], 'filament-spatie-health');
+            Css::make('filament-spatie-health-styles', __DIR__ . '/../resources/dist/plugin.css')->loadedOnRequest(),
+        ], package: 'filament-spatie-health');
     }
 }
