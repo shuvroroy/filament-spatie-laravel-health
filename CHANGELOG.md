@@ -2,6 +2,20 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.0.0-beta1 - 2025-07-06
+
+### What's Changed
+
+* chore(deps): bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/75
+* Update health.php by @panservicesas in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/81
+* Upgrade to filament v4 by @dododedodonl in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/80
+
+### New Contributors
+
+* @dododedodonl made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/80
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v2.3.6...v3.0.0-beta1
+
 ## v2.3.6 - 2025-04-13
 
 ### What's Changed
