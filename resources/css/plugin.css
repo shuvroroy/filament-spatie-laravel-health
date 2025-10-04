@@ -1,21 +1,30 @@
-@import 'tailwindcss';
-
-@config '../../tailwind.config.js';
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
-/* @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-} */
+.filament-spatie-health {
+    .grid {
+        display: grid;
+    }
+    .grid-cols-1 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .sm\:grid-cols-2 {
+        @media (min-width: 640px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    .lg\:grid-cols-3 {
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+    }
+    .gap-6 {
+        gap: 1.5rem;
+    }
+    .mb-5 {
+        margin-bottom: 1.25rem;
+    }
+    .text-danger-400 {
+        color: oklch(0.704 0.191 22.216);
+    }
+    .text-center {
+        text-align: center;
+    }
+}
