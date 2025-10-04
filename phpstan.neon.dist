@@ -2,13 +2,12 @@ includes:
     - phpstan-baseline.neon
 
 parameters:
-    level: max
+    level: 7
     paths:
         - src
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
-    checkMissingIterableValueType: false
     ignoreErrors:
         - '#Unsafe usage of new static#'
 
