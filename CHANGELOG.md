@@ -2,6 +2,10 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.1.0 - 2025-10-04
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.0.0...v3.1.0
+
 ## v3.0.0-beta1 - 2025-07-06
 
 ### What's Changed
