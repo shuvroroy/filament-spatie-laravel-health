@@ -134,7 +134,7 @@ class AdminPanelProvider extends PanelProvider
 
 ## Customising who can access the page
 
-You can customise who can access the `Hleath` page by adding an `authorize` method to the plugin.
+You can customise who can access the `Health` page by adding an `authorize` method to the plugin.
 The method should return a boolean indicating whether the user is authorised to access the page.
 
 ```php
