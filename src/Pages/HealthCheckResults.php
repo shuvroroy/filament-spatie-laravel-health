@@ -55,6 +55,11 @@ class HealthCheckResults extends Page
         return FilamentSpatieLaravelHealthPlugin::get()->getNavigationIcon();
     }
 
+    public function getTitle(): string | Htmlable
+    {
+        return FilamentSpatieLaravelHealthPlugin::get()->getNavigationLabel();
+    }
+
     protected function getViewData(): array
     {
         $checkResults = app(ResultStore::class)->latestResults();
