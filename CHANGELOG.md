@@ -2,6 +2,21 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.1.1 - 2025-10-15
+
+### What's Changed
+
+* fix: use navigation label for page title (translatable & customizable) by @relisiuol in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/89
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/88
+* chore: Fix typo in README for 'Health' page by @zoispag in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/87
+
+### New Contributors
+
+* @relisiuol made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/89
+* @zoispag made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/87
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.1.0...v3.1.1
+
 ## v3.1.0 - 2025-10-04
 
 **Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.0.0...v3.1.0
