@@ -2,6 +2,18 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.1.2 - 2025-10-22
+
+### What's Changed
+
+* Change icon for skipped health check status by @marcogermani87 in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/90
+
+### New Contributors
+
+* @marcogermani87 made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/90
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.1.1...v3.1.2
+
 ## v3.1.1 - 2025-10-15
 
 ### What's Changed
