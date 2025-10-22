@@ -18,7 +18,7 @@
             return match ($status) {
                 Spatie\Health\Enums\Status::ok()->value => 'check-circle',
                 Spatie\Health\Enums\Status::warning()->value => 'exclamation-circle',
-                Spatie\Health\Enums\Status::skipped()->value => 'arrow-circle-right',
+                Spatie\Health\Enums\Status::skipped()->value => 'arrow-right-circle',
                 Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'x-circle',
                 default => '',
             };
