@@ -7,6 +7,7 @@ use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
+use UnitEnum;
 
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
@@ -18,7 +19,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     protected string $page = HealthCheckResults::class;
 
-    protected string | Closure | null $navigationGroup = null;
+    protected string | UnitEnum | Closure | null $navigationGroup = null;
 
     protected int | Closure $navigationSort = 1;
 
@@ -79,7 +80,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this->page;
     }
 
-    public function navigationGroup(string | Closure | null $navigationGroup): static
+    public function navigationGroup(string | UnitEnum | Closure | null $navigationGroup): static
     {
         $this->navigationGroup = $navigationGroup;
         $this->navigationGroupSet = true;
@@ -87,7 +88,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this;
     }
 
-    public function getNavigationGroup(): ?string
+    public function getNavigationGroup(): string | UnitEnum | null
     {
         $navigationGroup = $this->evaluate($this->navigationGroup);
 
