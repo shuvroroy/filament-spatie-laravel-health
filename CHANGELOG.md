@@ -2,6 +2,23 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.3.0 - 2026-04-21
+
+### What's Changed
+
+* chore(deps): bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/96
+* chore(deps): bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/99
+* Add Laravel 13 support by @tranKILL in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/98
+* Support php 8.5 by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/101
+* Support UnitEnum for navigation group by @jyrkidn in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/95
+
+### New Contributors
+
+* @tranKILL made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/98
+* @jyrkidn made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/95
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.2.0...v3.3.0
+
 ## v3.2.0 - 2026-01-17
 
 ### What's Changed
