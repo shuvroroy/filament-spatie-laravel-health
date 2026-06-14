@@ -2,6 +2,18 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.3.1 - 2026-06-14
+
+### What's Changed
+
+* Created czech translation. by @Th3JK in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/102
+
+### New Contributors
+
+* @Th3JK made their first contribution in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/102
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.3.0...v3.3.1
+
 ## v3.3.0 - 2026-04-21
 
 ### What's Changed
