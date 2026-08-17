@@ -16,7 +16,8 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Проверить результаты от',
+                'check_results' => 'Результаты проверки от :lastRanAt',
+                'results_refreshed' => 'Результаты проверки обновлены',
             ],
         ],
     ],
