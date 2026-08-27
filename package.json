@@ -6,7 +6,7 @@
   "devDependencies": {
     "cssnano": "^8.0.6",
     "postcss": "^8.5.26",
-    "postcss-cli": "^10.1.0",
+    "postcss-cli": "^11.0.1",
     "postcss-nesting": "^14.0.1"
   }
 }
