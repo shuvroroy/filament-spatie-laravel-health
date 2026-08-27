@@ -2,6 +2,17 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.3.3 - 2026-08-27
+
+### What's Changed
+
+* chore(deps-dev): bump postcss from 8.5.6 to 8.5.26 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/105
+* chore(deps-dev): bump postcss-nesting from 12.1.5 to 14.0.1 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/106
+* chore(deps-dev): bump cssnano from 6.1.2 to 8.0.6 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/107
+* chore(deps-dev): bump postcss-cli from 10.1.0 to 11.0.1 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/108
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.3.2...v3.3.3
+
 ## v3.3.2 - 2026-08-27
 
 ### What's Changed
