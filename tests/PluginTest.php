@@ -2,6 +2,7 @@
 
 namespace ShuvroRoy\FilamentSpatieLaravelHealth\Tests;
 
+use Filament\Contracts\Plugin;
 use Filament\FilamentManager;
 use Filament\Pages\Page;
 use Filament\Panel;
@@ -113,6 +114,27 @@ class PluginTest extends TestCase
     public function test_it_fails_clearly_when_the_plugin_is_not_registered(): void
     {
         app(FilamentManager::class)->setCurrentPanel(Panel::make()->id('empty'));
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('not registered');
+        FilamentSpatieLaravelHealthPlugin::get();
+    }
+
+    public function test_it_fails_clearly_when_the_registered_plugin_has_the_wrong_type(): void
+    {
+        $plugin = new class implements Plugin
+        {
+            public function getId(): string
+            {
+                return 'filament-spatie-health';
+            }
+
+            public function register(Panel $panel): void {}
+
+            public function boot(Panel $panel): void {}
+        };
+
+        app(FilamentManager::class)->setCurrentPanel(Panel::make()->id('wrong-plugin')->plugin($plugin));
+
         $this->expectException(LogicException::class);
         $this->expectExceptionMessage('not registered');
         FilamentSpatieLaravelHealthPlugin::get();
