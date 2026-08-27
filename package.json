@@ -4,7 +4,7 @@
     "build": "postcss resources/css/plugin.css -o resources/dist/plugin.css"
   },
   "devDependencies": {
-    "cssnano": "^6.0.1",
+    "cssnano": "^8.0.6",
     "postcss": "^8.5.26",
     "postcss-cli": "^10.1.0",
     "postcss-nesting": "^14.0.1"
