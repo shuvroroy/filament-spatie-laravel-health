@@ -1,13 +1,9 @@
-includes:
-    - phpstan-baseline.neon
-
 parameters:
-    level: 7
+    level: max
     paths:
         - src
+        - tests
+        - tests
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
-    ignoreErrors:
-        - '#Unsafe usage of new static#'
-

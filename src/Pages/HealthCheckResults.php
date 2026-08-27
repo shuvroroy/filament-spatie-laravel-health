@@ -22,7 +22,7 @@ class HealthCheckResults extends Page
 
     protected string $view = 'filament-spatie-health::pages.health-check-results';
 
-    protected function getActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make(__('filament-spatie-health::health.pages.health_check_results.buttons.refresh'))

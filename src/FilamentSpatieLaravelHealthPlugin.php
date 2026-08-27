@@ -4,11 +4,14 @@ namespace ShuvroRoy\FilamentSpatieLaravelHealth;
 
 use Closure;
 use Filament\Contracts\Plugin;
+use Filament\Pages\Page;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
+use LogicException;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use UnitEnum;
 
+/** @phpstan-consistent-constructor */
 class FilamentSpatieLaravelHealthPlugin implements Plugin
 {
     use EvaluatesClosures;
@@ -17,6 +20,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     protected bool $navigationGroupSet = false;
 
+    /** @var class-string<Page> */
     protected string $page = HealthCheckResults::class;
 
     protected string | UnitEnum | Closure | null $navigationGroup = null;
@@ -29,7 +33,6 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        // @phpstan-ignore-next-line
         $panel->pages([$this->getPage()]);
     }
 
@@ -52,8 +55,11 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public static function get(): static
     {
-        /** @var static $instance */
-        $instance = filament(app(static::class)->getId());
+        $instance = filament('filament-spatie-health');
+
+        if (! $instance instanceof static) {
+            throw new LogicException('The Filament Spatie Laravel Health plugin is not registered on the current panel.');
+        }
 
         return $instance;
     }
@@ -68,6 +74,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return new static;
     }
 
+    /** @param class-string<Page> $page */
     public function usingPage(string $page): static
     {
         $this->page = $page;
@@ -75,6 +82,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         return $this;
     }
 
+    /** @return class-string<Page> */
     public function getPage(): string
     {
         return $this->page;
@@ -92,6 +100,10 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     {
         $navigationGroup = $this->evaluate($this->navigationGroup);
 
+        if (! is_string($navigationGroup) && ! $navigationGroup instanceof UnitEnum && $navigationGroup !== null) {
+            throw new LogicException('The navigation group must resolve to a string, enum, or null.');
+        }
+
         if ($navigationGroup === null && $this->navigationGroupSet === false) {
             return __('filament-spatie-health::health.pages.health_check_results.navigation.group');
         }
@@ -108,7 +120,13 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function getNavigationSort(): int
     {
-        return $this->evaluate($this->navigationSort);
+        $navigationSort = $this->evaluate($this->navigationSort);
+
+        if (! is_int($navigationSort)) {
+            throw new LogicException('The navigation sort must resolve to an integer.');
+        }
+
+        return $navigationSort;
     }
 
     public function navigationIcon(string | Closure $navigationIcon): static
@@ -120,7 +138,13 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function getNavigationIcon(): string
     {
-        return $this->evaluate($this->navigationIcon);
+        $navigationIcon = $this->evaluate($this->navigationIcon);
+
+        if (! is_string($navigationIcon)) {
+            throw new LogicException('The navigation icon must resolve to a string.');
+        }
+
+        return $navigationIcon;
     }
 
     public function navigationLabel(string | Closure | null $navigationLabel): static
@@ -132,6 +156,12 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function getNavigationLabel(): string
     {
-        return $this->evaluate($this->navigationLabel) ?? __('filament-spatie-health::health.pages.health_check_results.navigation.label');
+        $navigationLabel = $this->evaluate($this->navigationLabel);
+
+        if (! is_string($navigationLabel) && $navigationLabel !== null) {
+            throw new LogicException('The navigation label must resolve to a string or null.');
+        }
+
+        return $navigationLabel ?? __('filament-spatie-health::health.pages.health_check_results.navigation.label');
     }
 }

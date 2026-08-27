@@ -61,3 +61,24 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/pest --ci
+
+  coverage:
+    name: 100% coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: xdebug
+
+      - name: Install composer dependencies
+        uses: ramsey/composer-install@v4
+
+      - name: Enforce full coverage
+        run: composer test:coverage
