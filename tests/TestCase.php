@@ -3,6 +3,7 @@
 namespace ShuvroRoy\FilamentSpatieLaravelHealth\Tests;
 
 use Filament\FilamentServiceProvider;
+use Filament\Notifications\NotificationsServiceProvider;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -20,6 +21,7 @@ class TestCase extends Orchestra
         return [
             FilamentSpatieLaravelHealthServiceProvider::class,
             FilamentServiceProvider::class,
+            NotificationsServiceProvider::class,
             HealthServiceProvider::class,
             LivewireServiceProvider::class,
         ];

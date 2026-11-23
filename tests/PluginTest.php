@@ -115,7 +115,7 @@ class PluginTest extends TestCase
     {
         app(FilamentManager::class)->setCurrentPanel(Panel::make()->id('empty'));
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('not registered');
+        $this->expectExceptionMessageMatches('/not registered/');
         FilamentSpatieLaravelHealthPlugin::get();
     }
 
@@ -136,7 +136,7 @@ class PluginTest extends TestCase
         app(FilamentManager::class)->setCurrentPanel(Panel::make()->id('wrong-plugin')->plugin($plugin));
 
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('not registered');
+        $this->expectExceptionMessageMatches('/not registered/');
         FilamentSpatieLaravelHealthPlugin::get();
     }
 }
