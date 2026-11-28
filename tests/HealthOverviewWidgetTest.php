@@ -174,6 +174,14 @@ class HealthOverviewWidgetTest extends TestCase
         $this->storeResults($results);
 
         $page = Livewire::test(OperationsHealthPage::class);
+        $componentId = $page->instance()->getId();
+        self::assertIsString($componentId);
+        $dialogId = $componentId . '-check-' . sha1('Queue');
+        $page->assertSeeInOrder([
+            'aria-controls="' . $dialogId . '"',
+            '<template x-teleport="body">',
+            'aria-labelledby="' . $dialogId . '-title"',
+        ], false);
         $page->assertSee('Five pending jobs')->assertSee($message)->assertSee(Str::limit($message, 160))
             ->assertDontSee($message, false)->assertDontSee('private-token')->assertDontSee('private-cache');
         self::assertSame(1, substr_count($page->html(), 'class="filament-spatie-health health-check-details"'));

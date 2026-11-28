@@ -169,6 +169,8 @@
         gap: 1rem;
     }
     .health-result-card {
+        display: flex;
+        flex-direction: column;
         padding: 1.25rem;
         background: linear-gradient(135deg, color-mix(in srgb, var(--health-state) 4%, var(--health-surface)), var(--health-surface) 55%);
     }
@@ -197,7 +199,7 @@
         font-size: 0.875rem;
         line-height: 1.55;
     }
-    .health-details-trigger { margin-block-start: 0.75rem; }
+    .health-result-actions { margin-block-start: auto; padding-block-start: 0.75rem; }
     .health-results-empty { padding: 1.25rem; }
 }
 
@@ -206,6 +208,7 @@
     align-items: center;
     gap: 0.875rem;
     inline-size: 100%;
+    padding-inline-end: 2.5rem;
     overflow-wrap: anywhere;
 }
 .health-details-header .health-result-icon {
