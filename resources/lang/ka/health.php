@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'განახლება',
+                'run_checks' => 'შემოწმებების გაშვება',
             ],
 
             'heading' => 'აპლიკაციის სტატუსი',

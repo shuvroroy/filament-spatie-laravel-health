@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => '更新',
+                'run_checks' => 'チェックを実行',
             ],
 
             'heading' => 'アプリケーションの健康状態',

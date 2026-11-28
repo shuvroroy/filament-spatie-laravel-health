@@ -92,6 +92,13 @@ class PluginTest extends TestCase
         self::assertTrue($this->plugin->authorize(fn (): bool => true)->isAuthorized());
     }
 
+    public function test_run_permission_is_additional_to_view_permission(): void
+    {
+        self::assertTrue($this->plugin->isAuthorizedToRunChecks());
+        $this->plugin->authorize(false)->authorizeRunChecks(fn (): bool => true);
+        self::assertFalse($this->plugin->isAuthorizedToRunChecks());
+    }
+
     public function test_the_panel_includes_the_health_stylesheet_in_its_initial_styles(): void
     {
         $this->panel->registerAssets();

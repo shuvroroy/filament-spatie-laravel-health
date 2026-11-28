@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Vernieuwen',
+                'run_checks' => 'Controles uitvoeren',
             ],
 
             'heading' => 'Gezondheid van de applicatie',

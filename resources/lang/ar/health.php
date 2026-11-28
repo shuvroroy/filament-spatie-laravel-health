@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'تحديث',
+                'run_checks' => 'تشغيل الفحوصات',
             ],
 
             'heading' => 'حالة النظام',

@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Obnoviť',
+                'run_checks' => 'Spustiť kontroly',
             ],
 
             'heading' => 'Stav aplikácie',

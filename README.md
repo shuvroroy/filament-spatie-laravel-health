@@ -89,7 +89,7 @@ See the [available checks](https://spatie.be/docs/laravel-health/v1/available-ch
 
 Open **Application Health** in the panel to see the latest stored results. Select **Needs attention** to show warnings, failures, and crashed checks. Skipped checks also appear when Spatie's `health.treat_skipped_as_failure` setting is enabled (the default). The filtered URL can be bookmarked or shared with another authorized user.
 
-To populate the page for the first time, select **Refresh** or run `php artisan health:check`. Opening the page and switching filters read the stored results. **Refresh** runs the checks again.
+Select **Run checks** to execute the registered checks and update their results, or run `php artisan health:check`. Opening the page and switching filters read the stored results.
 
 ### Check details
 
@@ -219,6 +219,20 @@ class AdminPanelProvider extends PanelProvider
     }
 }
 ```
+
+### Restricting who can run checks
+
+By default, users with access to the results page can run checks. Use `authorizeRunChecks()` in your panel provider to give operators that permission while other viewers can still inspect and share results. This example uses two abilities defined by your application.
+
+```php
+use Illuminate\Support\Facades\Gate;
+
+FilamentSpatieLaravelHealthPlugin::make()
+    ->authorize(fn (): bool => Gate::allows('viewHealth'))
+    ->authorizeRunChecks(fn (): bool => Gate::allows('runHealthChecks'));
+```
+
+Pass `false` to `authorizeRunChecks()` for a read-only panel. The setting applies to manual runs from Filament. Scheduled checks and the Artisan command continue to use your existing configuration.
 
 ## Upgrading
 

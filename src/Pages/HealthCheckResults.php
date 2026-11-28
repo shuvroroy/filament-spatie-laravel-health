@@ -47,6 +47,8 @@ class HealthCheckResults extends Page
 
         return [
             Action::make(__('filament-spatie-health::health.pages.health_check_results.buttons.refresh'))
+                ->label(__('filament-spatie-health::health.pages.health_check_results.buttons.run_checks'))
+                ->authorize(fn (): bool => $this->canRunChecks())
                 ->button()
                 ->action('refresh'),
         ];
@@ -132,6 +134,8 @@ class HealthCheckResults extends Page
             return;
         }
 
+        abort_unless($this->canRunChecks(), 403);
+
         Artisan::call(RunHealthChecksCommand::class);
 
         $this->dispatch('refresh-component');
@@ -140,6 +144,11 @@ class HealthCheckResults extends Page
             ->title(__('filament-spatie-health::health.pages.health_check_results.notifications.results_refreshed'))
             ->success()
             ->send();
+    }
+
+    private function canRunChecks(): bool
+    {
+        return static::canAccess() && FilamentSpatieLaravelHealthPlugin::get()->isAuthorizedToRunChecks();
     }
 
     public static function canAccess(): bool
