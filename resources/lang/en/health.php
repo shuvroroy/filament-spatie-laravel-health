@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Last :count runs',
     'latest_run' => 'Latest run',
+    'saved_run' => 'Saved run',
+    'back_to_latest' => 'Back to latest',
+    'run_unavailable' => 'This run is no longer available.',
 
     'status_labels' => [
         'ok' => 'Passing',
