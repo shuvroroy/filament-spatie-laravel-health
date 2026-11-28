@@ -10,6 +10,8 @@ return [
     'recent_runs' => ':count اجرای اخیر',
     'latest_run' => 'آخرین اجرا',
     'saved_run' => 'اجرای ذخیره‌شده',
+    'view_details' => 'مشاهده جزئیات',
+    'recorded_values' => 'مقادیر ثبت‌شده',
     'back_to_latest' => 'بازگشت به آخرین نتایج',
     'run_unavailable' => 'این اجرا دیگر در دسترس نیست.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'خطای اجرا',
         'skipped' => 'ردشده',
         'other' => 'نامشخص',
+    ],
+
+    'status_groups' => [
+        'failed' => 'خطاها',
+        'warning' => 'هشدارها',
+        'crashed' => 'بررسی‌های متوقف‌شده',
+        'skipped' => 'بررسی‌های ردشده',
     ],
 
     'status_counts' => [

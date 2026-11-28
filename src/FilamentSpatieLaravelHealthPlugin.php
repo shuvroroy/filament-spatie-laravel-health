@@ -11,6 +11,7 @@ use Filament\Support\Concerns\EvaluatesClosures;
 use LogicException;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
+use Spatie\Health\ResultStores\StoredCheckResults\StoredCheckResult;
 use UnitEnum;
 
 /** @phpstan-consistent-constructor */
@@ -21,6 +22,9 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     protected bool | Closure $authorizeUsing = true;
 
     protected bool $hasDashboardWidget = false;
+
+    /** @var array<string, array<string, string>> */
+    protected array $checkMetadata = [];
 
     protected bool $navigationGroupSet = false;
 
@@ -58,6 +62,30 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
         $this->hasDashboardWidget = $enabled;
 
         return $this;
+    }
+
+    /** @param array<string, array<string, string>> $fields Metadata keys and display labels, indexed by check name. */
+    public function checkMetadata(array $fields): static
+    {
+        $this->checkMetadata = $fields;
+
+        return $this;
+    }
+
+    /** @return list<array{label: string, value: string|int|float|bool}> */
+    public function getCheckMetadata(StoredCheckResult $result): array
+    {
+        $fields = [];
+
+        foreach ($this->checkMetadata[$result->name] ?? [] as $key => $label) {
+            $value = $result->meta[$key] ?? null;
+
+            if (is_scalar($value) && $value !== '') {
+                $fields[] = ['label' => $label, 'value' => $value];
+            }
+        }
+
+        return $fields;
     }
 
     public function authorize(bool | Closure $callback = true): static

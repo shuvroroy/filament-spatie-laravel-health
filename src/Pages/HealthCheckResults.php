@@ -89,6 +89,7 @@ class HealthCheckResults extends Page
         $attentionResults = ChecksNeedingAttention::from($checkResults);
 
         return [
+            'healthPlugin' => FilamentSpatieLaravelHealthPlugin::get(),
             'lastRanAt' => $checkResults ? Carbon::instance($checkResults->finishedAt) : null,
             'checkResults' => $checkResults,
             'visibleResults' => $this->needsAttention ? $attentionResults : $checkResults?->storedCheckResults,

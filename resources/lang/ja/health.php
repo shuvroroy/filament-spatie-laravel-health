@@ -10,6 +10,8 @@ return [
     'recent_runs' => '直近 :count 回',
     'latest_run' => '直近の実行',
     'saved_run' => '保存された実行結果',
+    'view_details' => '詳細を表示',
+    'recorded_values' => '記録された値',
     'back_to_latest' => '最新の結果に戻る',
     'run_unavailable' => 'この実行結果は利用できなくなりました。',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => '異常終了',
         'skipped' => 'スキップ',
         'other' => '不明',
+    ],
+
+    'status_groups' => [
+        'failed' => '失敗',
+        'warning' => '警告',
+        'crashed' => '異常終了したチェック',
+        'skipped' => 'スキップされたチェック',
     ],
 
     'status_counts' => [

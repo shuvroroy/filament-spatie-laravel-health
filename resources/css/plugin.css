@@ -169,6 +169,8 @@
         gap: 1rem;
     }
     .health-result-card {
+        display: flex;
+        flex-direction: column;
         padding: 1.25rem;
         background: linear-gradient(135deg, color-mix(in srgb, var(--health-state) 4%, var(--health-surface)), var(--health-surface) 55%);
     }
@@ -197,8 +199,58 @@
         font-size: 0.875rem;
         line-height: 1.55;
     }
+    .health-result-actions { margin-block-start: auto; padding-block-start: 0.75rem; }
     .health-results-empty { padding: 1.25rem; }
 }
+
+.health-details-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    inline-size: 100%;
+    padding-inline-end: 2.5rem;
+    overflow-wrap: anywhere;
+}
+.health-details-header .health-result-icon {
+    background: var(--health-inset);
+    border: 1px solid var(--health-border);
+    color: var(--health-accent);
+}
+.health-details-header h2 { font-size: 1.125rem; font-weight: 650; line-height: 1.3; }
+.health-details-header time { color: var(--health-muted); font-size: 0.8125rem; }
+
+.health-check-details {
+    display: grid;
+    gap: 1.5rem;
+    overflow-wrap: anywhere;
+    font-size: 0.875rem;
+    line-height: 1.55;
+}
+.health-details-result {
+    display: grid;
+    justify-items: start;
+    gap: 0.625rem;
+    padding: 1rem 1.125rem;
+    border: 1px solid color-mix(in srgb, var(--health-state) 24%, var(--health-surface));
+    border-radius: 0.875rem;
+    background: color-mix(in srgb, var(--health-state) 5%, var(--health-surface));
+}
+.health-details-result strong { font-size: 1.125rem; line-height: 1.35; }
+.health-details-result p, .health-check-details dd { white-space: pre-wrap; }
+.health-check-details h3 { font-size: 0.875rem; font-weight: 650; margin-block-end: 0.625rem; }
+.health-check-details dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr));
+    gap: 0.625rem;
+}
+.health-check-details dl > div {
+    min-inline-size: 0;
+    padding: 0.75rem 0.875rem;
+    background: var(--health-inset);
+    border-radius: 0.625rem;
+}
+.health-check-details dt { color: var(--health-muted); font-size: 0.75rem; }
+.health-check-details dd { margin-block-start: 0.2rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 
 @container (max-width: 36rem) {
     .filament-spatie-health .health-run-time {
@@ -298,21 +350,78 @@
     .health-chart-legend i { width: 0.45rem; height: 0.45rem; border-radius: 50%; }
     .health-distribution span, .health-chart-legend i { background: var(--health-state); }
     .health-status-groups, .health-empty-state { margin: 1rem 1.125rem; }
-    .health-status-group {
-        display: flex;
-        align-items: baseline;
-        flex-direction: row-reverse;
-        flex-wrap: wrap;
-        gap: 0.5rem 0.875rem;
-    }
-    .health-status-group dd { flex: 1 1 10rem; min-inline-size: 0; }
     .health-status-group + .health-status-group {
         margin-block-start: 0.8rem;
         padding-block-start: 0.8rem;
         border-block-start: 1px solid var(--health-rule);
     }
-    .health-check-list { display: grid; gap: 0.6rem; }
-    .health-check-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.625rem; }
+    .health-group-disclosure {
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--health-state) 22%, var(--health-surface));
+        border-radius: 0.75rem;
+        background: var(--health-surface);
+    }
+    .health-group-disclosure summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+        padding: 0.75rem 0.875rem;
+        min-block-size: 2.75rem;
+        background: color-mix(in srgb, var(--health-state) 4%, var(--health-surface));
+        cursor: pointer;
+        list-style: none;
+    }
+    .health-group-disclosure summary::-webkit-details-marker { display: none; }
+    .health-group-disclosure:has(> summary:focus-visible) {
+        outline: 2px solid var(--health-state);
+        outline-offset: 2px;
+    }
+    .health-group-disclosure summary:focus-visible { outline: none; }
+    .health-group-heading {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--health-ink);
+        font-size: 0.9375rem;
+        font-weight: 650;
+    }
+    .health-group-heading svg { flex: none; inline-size: 1.125rem; block-size: 1.125rem; color: var(--health-state); }
+    .health-group-count {
+        padding-inline: 0.375rem;
+        border-radius: 0.375rem;
+        background: color-mix(in srgb, var(--health-state) 11%, var(--health-surface));
+        color: var(--health-state);
+        font-size: 0.75rem;
+        font-variant-numeric: tabular-nums;
+        line-height: 1.125rem;
+    }
+    .health-group-preview {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.375rem 1rem;
+        color: var(--health-muted);
+        font-size: 0.8125rem;
+        line-height: 1.4;
+    }
+    .health-group-check {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.35rem;
+        max-inline-size: 100%;
+        overflow-wrap: anywhere;
+    }
+    .health-group-check svg { width: 0.95rem; height: 0.95rem; align-self: center; }
+    .health-group-check > [aria-hidden] { flex: none; align-self: center; }
+    .health-group-chevron { width: 1rem; height: 1rem; color: var(--health-muted); }
+    .health-group-disclosure[open] .health-group-chevron { transform: rotate(180deg); }
+    .health-group-disclosure[open] .health-group-preview { display: none; }
+    .health-group-disclosure .health-check-list { padding: 0.875rem; border-block-start: 1px solid var(--health-rule); }
+    .health-check-list { display: grid; gap: 0.875rem; }
+    .health-check-list li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.625rem; align-items: start; }
+    .health-status-group > .health-check-list li { grid-template-columns: auto minmax(0, 1fr) auto; }
     .health-row-icon {
         display: grid;
         place-items: center;

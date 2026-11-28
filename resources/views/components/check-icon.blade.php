@@ -8,6 +8,7 @@
         'Cache', 'Redis', 'RedisMemoryUsage' => 'heroicon-o-bolt',
         'Backups' => 'heroicon-o-archive-box',
         'Schedule' => 'heroicon-o-clock',
+        'MailTransport' => 'heroicon-o-envelope',
         'Ping' => 'heroicon-o-signal',
         default => 'heroicon-o-clipboard-document-check',
     }" />

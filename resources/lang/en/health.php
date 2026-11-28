@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Last :count runs',
     'latest_run' => 'Latest run',
     'saved_run' => 'Saved run',
+    'view_details' => 'View details',
+    'recorded_values' => 'Recorded values',
     'back_to_latest' => 'Back to latest',
     'run_unavailable' => 'This run is no longer available.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Crashed',
         'skipped' => 'Skipped',
         'other' => 'Unknown',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Failures',
+        'warning' => 'Warnings',
+        'crashed' => 'Crashed checks',
+        'skipped' => 'Skipped checks',
     ],
 
     'status_counts' => [

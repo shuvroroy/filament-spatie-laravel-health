@@ -10,6 +10,8 @@ return [
     'recent_runs' => ':count pemeriksaan terakhir',
     'latest_run' => 'Pemeriksaan terakhir',
     'saved_run' => 'Pemeriksaan tersimpan',
+    'view_details' => 'Lihat detail',
+    'recorded_values' => 'Nilai tercatat',
     'back_to_latest' => 'Kembali ke hasil terbaru',
     'run_unavailable' => 'Hasil pemeriksaan ini sudah tidak tersedia.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Galat eksekusi',
         'skipped' => 'Dilewati',
         'other' => 'Tidak diketahui',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Kegagalan',
+        'warning' => 'Peringatan',
+        'crashed' => 'Pemeriksaan terhenti',
+        'skipped' => 'Pemeriksaan dilewati',
     ],
 
     'status_counts' => [

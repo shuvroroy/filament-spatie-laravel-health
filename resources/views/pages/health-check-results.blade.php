@@ -29,16 +29,7 @@
             @if ($visibleResults?->isNotEmpty())
                 <ul class="health-result-grid">
                     @foreach ($visibleResults as $result)
-                        <li class="health-result-card" data-severity="{{ $result->status }}" wire:key="health-check-{{ $result->name }}">
-                            <div class="health-result-heading">
-                                <x-filament-spatie-health::check-icon :name="$result->name" class="health-result-icon" />
-                                <x-filament-spatie-health::status-badge :status="$result->status" />
-                            </div>
-                            <h2>{{ $result->label ?: $result->name }}</h2>
-                            @if (filled($message = $result->notificationMessage ?: $result->shortSummary))
-                                <p>{{ $message }}</p>
-                            @endif
-                        </li>
+                        @include('filament-spatie-health::pages.check-result-card')
                     @endforeach
                 </ul>
             @else

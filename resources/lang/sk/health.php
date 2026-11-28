@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Posledné spustenia (:count)',
     'latest_run' => 'Posledné spustenie',
     'saved_run' => 'Uložený beh',
+    'view_details' => 'Zobraziť podrobnosti',
+    'recorded_values' => 'Zaznamenané hodnoty',
     'back_to_latest' => 'Späť na najnovšie výsledky',
     'run_unavailable' => 'Tento beh už nie je k dispozícii.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Pád',
         'skipped' => 'Preskočené',
         'other' => 'Neznámy stav',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Zlyhania',
+        'warning' => 'Upozornenia',
+        'crashed' => 'Havarované kontroly',
+        'skipped' => 'Preskočené kontroly',
     ],
 
     'status_counts' => [

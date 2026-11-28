@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Poslední běhy (:count)',
     'latest_run' => 'Poslední běh',
     'saved_run' => 'Uložený běh',
+    'view_details' => 'Zobrazit podrobnosti',
+    'recorded_values' => 'Zaznamenané hodnoty',
     'back_to_latest' => 'Zpět na nejnovější výsledky',
     'run_unavailable' => 'Tento běh již není k dispozici.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Pád',
         'skipped' => 'Přeskočeno',
         'other' => 'Neznámý stav',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Selhání',
+        'warning' => 'Varování',
+        'crashed' => 'Havarované kontroly',
+        'skipped' => 'Přeskočené kontroly',
     ],
 
     'status_counts' => [
