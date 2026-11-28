@@ -8,13 +8,9 @@
 
 This package adds a Filament page for monitoring checks registered with [spatie/laravel-health](https://spatie.be/docs/laravel-health/v1/introduction). It supports Filament 4 and 5 and PHP 8.2 or newer. CI tests PHP 8.6 with Laravel 13.
 
-**Light mode**
-
-![Application Health in light mode showing one failed check, one warning, and two passing checks](art/results-light.png)
-
-**Dark mode**
-
-![The same four health checks in dark mode](art/results-dark.png)
+| Light mode | Dark mode |
+| --- | --- |
+| ![Application Health in light mode showing one failed check, one warning, and two passing checks](art/results-light.png) | ![The same four health checks in dark mode](art/results-dark.png) |
 
 ## Installation
 
