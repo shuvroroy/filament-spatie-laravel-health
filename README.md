@@ -8,12 +8,13 @@
 
 This package adds a Filament page for monitoring checks registered with [spatie/laravel-health](https://spatie.be/docs/laravel-health/v1/introduction). It supports Filament 4 and 5 and PHP 8.2 or newer. CI tests PHP 8.6 with Laravel 13.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="art/results-dark.png">
-  <img src="art/results-light.png" alt="Application Health results showing a failed queue check, a disk warning, and two passing checks">
-</picture>
+**Light mode**
 
-View the results page in [light mode](art/results-light.png) or [dark mode](art/results-dark.png).
+![Application Health in light mode showing one failed check, one warning, and two passing checks](art/results-light.png)
+
+**Dark mode**
+
+![The same four health checks in dark mode](art/results-dark.png)
 
 ## Installation
 
@@ -102,12 +103,9 @@ Enable the widget in the panel provider for each dashboard where you want it:
 $panel->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
 ```
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="art/widget-dark.png">
-  <img src="art/widget-light.png" width="552" alt="Dashboard widget with two of four checks needing attention, a 12-run history chart, and messages for the queue and disk checks">
-</picture>
-
-View the widget in [light mode](art/widget-light.png) or [dark mode](art/widget-dark.png).
+| Light mode | Dark mode |
+| --- | --- |
+| ![Dashboard widget in light mode showing two checks needing attention and the last 12 runs](art/widget-light.png) | ![The same dashboard widget and run history in dark mode](art/widget-dark.png) |
 
 The widget reads saved results every minute while visible. It shows the last run time and previews up to two checks per affected status, starting with crashed and failed checks.
 
