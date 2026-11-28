@@ -270,7 +270,7 @@
         background: repeating-linear-gradient(to top, transparent 0 calc(50% - 1px), var(--health-rule) calc(50% - 1px) 50%);
     }
     .health-run-bars li { flex: 1; min-width: 0; }
-    .health-run-bars button {
+    .health-run-bars a {
         display: flex;
         flex-direction: column;
         justify-content: end;
@@ -288,8 +288,8 @@
         border-radius: 0.18rem 0.18rem 0 0;
     }
     .health-run-bars li:last-child .health-run-bar,
-    .health-run-bars button:is(:hover, :focus-visible) .health-run-bar { background: var(--health-accent); }
-    .health-run-bars button:focus-visible { outline: 2px solid var(--health-accent); outline-offset: 1px; }
+    .health-run-bars a:is(:hover, :focus-visible) .health-run-bar { background: var(--health-accent); }
+    .health-run-bars a:focus-visible { outline: 2px solid var(--health-accent); outline-offset: 1px; }
     .health-bar-count { font-size: 0.65rem; line-height: 1rem; }
     .health-distribution, .health-chart-legend, .health-chart-legend li { display: flex; gap: 0.3rem; }
     .health-distribution { gap: 2px; height: 0.625rem; margin-block: 0.625rem; border-radius: 1rem; overflow: hidden; }

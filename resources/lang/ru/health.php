@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Последние запуски (:count)',
     'latest_run' => 'Последний запуск',
+    'saved_run' => 'Сохранённый запуск',
+    'back_to_latest' => 'К последним результатам',
+    'run_unavailable' => 'Этот запуск больше недоступен.',
 
     'status_labels' => [
         'ok' => 'Пройдено',

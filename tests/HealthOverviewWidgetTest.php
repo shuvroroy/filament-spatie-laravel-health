@@ -10,11 +10,14 @@ use Filament\Panel;
 use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
@@ -107,7 +110,7 @@ class HealthOverviewWidgetTest extends TestCase
             foreach (['Database' => 'ok', 'Disk' => $run % 2 ? 'warning' : 'ok', 'Queue' => 'skipped'] as $name => $status) {
                 DemoHistoryItem::create([
                     'batch' => $batch, 'check_name' => $name, 'check_label' => $name, 'status' => $status,
-                    'short_summary' => $name, 'meta' => [], 'ended_at' => $time, 'created_at' => $time,
+                    'short_summary' => "{$name} from run {$run}", 'meta' => [], 'ended_at' => $time, 'created_at' => $time,
                 ]);
             }
 
@@ -137,6 +140,56 @@ class HealthOverviewWidgetTest extends TestCase
             ->assertDontSee('health-run-00000000-0000-0000-0000-000000000001')
             ->assertSeeInOrder(['health-run-00000000-0000-0000-0000-000000000002', 'Needs attention 0/4', 'health-run-00000000-0000-0000-0000-000000000003', 'Needs attention 1/3']);
         self::assertSame(12, substr_count($chart->html(), 'class="health-run-bar"'));
+
+        $batch = '00000000-0000-0000-0000-000000000003';
+        $params = ['run' => $batch, 'needsAttention' => 1];
+        $chart->assertSee(OperationsHealthPage::getUrl($params));
+        $page = Livewire::withQueryParams($params)->test(OperationsHealthPage::class);
+        $page->assertSee('Saved run')->assertSee($day->copy()->addMinutes(3)->isoFormat('LLL'))
+            ->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->assertSee('Disk from run 3')->assertDontSee('Database from run 3')->assertDontSee('Disk from run 13')
+            ->set('needsAttention', false)->assertSee('Database from run 3')->assertSet('run', $batch);
+        $kernel = $this->createMock(Kernel::class);
+        $kernel->expects(self::never())->method('call');
+        Artisan::swap($kernel);
+        $page->call('refresh')->assertSee('Saved run');
+        DemoHistoryItem::query()->where('batch', $batch)->delete();
+        $page->call('$refresh')->assertSee('This run is no longer available.')->assertDontSee('Disk from run 13');
+
+        Livewire::withQueryParams(['run' => 'invalid'])->test(OperationsHealthPage::class)
+            ->assertSee('This run is no longer available.');
+    }
+
+    public function test_a_saved_run_url_on_a_latest_only_store_does_not_display_current_results(): void
+    {
+        $store = $this->createMock(ResultStore::class);
+        $store->expects(self::never())->method('latestResults');
+        app()->instance(ResultStore::class, $store);
+
+        Livewire::withQueryParams(['run' => '00000000-0000-0000-0000-000000000001'])->test(OperationsHealthPage::class)
+            ->assertSee('This run is no longer available.')->assertSee('Back to latest');
+    }
+
+    /** @return array<string, array{string|list<string>}> */
+    public static function malformedRunSelectors(): array
+    {
+        return [
+            'array' => [['invalid']],
+            'empty' => [''],
+        ];
+    }
+
+    /** @param string|list<string> $selector */
+    #[DataProvider('malformedRunSelectors')]
+    public function test_a_malformed_run_never_reads_latest_results(string | array $selector): void
+    {
+        $store = $this->createMock(ResultStore::class);
+        $store->expects(self::never())->method('latestResults');
+        app()->instance(ResultStore::class, $store);
+
+        Livewire::withQueryParams(['run' => $selector])->test(OperationsHealthPage::class)
+            ->assertSee('This run is no longer available.')->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->call('$refresh')->assertSee('This run is no longer available.');
     }
 
     public function test_skipped_checks_can_be_excluded_from_the_widget_and_filter(): void
@@ -186,6 +239,8 @@ class HealthOverviewWidgetTest extends TestCase
 
         self::assertFalse(HealthOverviewWidget::canView());
         Livewire::test(HealthOverviewWidget::class)->assertForbidden();
+        Livewire::withQueryParams(['run' => '00000000-0000-0000-0000-000000000001'])->test(OperationsHealthPage::class)
+            ->assertForbidden();
     }
 
     public function test_widget_respects_the_custom_pages_access_rule(): void

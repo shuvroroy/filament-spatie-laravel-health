@@ -34,6 +34,7 @@ class HealthOverviewWidget extends Widget
         $page = FilamentSpatieLaravelHealthPlugin::get()->getPage();
 
         return [
+            'resultsPage' => $page,
             'recentRuns' => $results ? $this->recentRuns($store) : collect(),
             'statusCounts' => $results?->storedCheckResults->countBy('status'),
             'checksByStatus' => $attention->groupBy('status'),

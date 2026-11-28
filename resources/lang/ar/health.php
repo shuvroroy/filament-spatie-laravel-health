@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'آخر :count عمليات فحص',
     'latest_run' => 'آخر عملية فحص',
+    'saved_run' => 'تشغيل محفوظ',
+    'back_to_latest' => 'العودة إلى أحدث النتائج',
+    'run_unavailable' => 'لم يعد هذا التشغيل متاحًا.',
 
     'status_labels' => [
         'ok' => 'ناجح',

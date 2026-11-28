@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Letzte :count Durchläufe',
     'latest_run' => 'Letzter Durchlauf',
+    'saved_run' => 'Gespeicherter Durchlauf',
+    'back_to_latest' => 'Zu den aktuellen Ergebnissen',
+    'run_unavailable' => 'Dieser Durchlauf ist nicht mehr verfügbar.',
 
     'status_labels' => [
         'ok' => 'Erfolgreich',

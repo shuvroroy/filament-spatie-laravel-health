@@ -22,11 +22,11 @@
                 @foreach ($recentRuns as $run)
                     @php($description = $run->created_at->isoFormat('LLL') . ' · ' . __('filament-spatie-health::health.needs_attention') . ' ' . $run->attention_count . '/' . $run->total_count)
                     <li wire:key="health-run-{{ $run->batch }}">
-                        <button type="button" aria-label="{{ $description }}"
-                            x-tooltip="{ content: @js($description), trigger: 'mouseenter focus click', allowHTML: false, theme: $store.theme }">
+                        <a href="{{ $resultsPage::getUrl(['run' => $run->batch, 'needsAttention' => 1]) }}" aria-label="{{ $description }}"
+                            x-tooltip="{ content: @js($description), trigger: 'mouseenter focus', allowHTML: false, theme: $store.theme }">
                             <span class="health-bar-count" aria-hidden="true">{{ $run->attention_count }}</span>
                             <span class="health-run-bar" aria-hidden="true" style="--height: {{ 100 * $run->attention_count / $peak }}%"></span>
-                        </button>
+                        </a>
                     </li>
                 @endforeach
             </ol>

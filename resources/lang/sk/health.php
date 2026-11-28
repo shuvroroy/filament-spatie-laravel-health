@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Posledné spustenia (:count)',
     'latest_run' => 'Posledné spustenie',
+    'saved_run' => 'Uložený beh',
+    'back_to_latest' => 'Späť na najnovšie výsledky',
+    'run_unavailable' => 'Tento beh už nie je k dispozícii.',
 
     'status_labels' => [
         'ok' => 'V poriadku',

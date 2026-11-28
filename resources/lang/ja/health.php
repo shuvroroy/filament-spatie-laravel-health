@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => '直近 :count 回',
     'latest_run' => '直近の実行',
+    'saved_run' => '保存された実行結果',
+    'back_to_latest' => '最新の結果に戻る',
+    'run_unavailable' => 'この実行結果は利用できなくなりました。',
 
     'status_labels' => [
         'ok' => '正常',

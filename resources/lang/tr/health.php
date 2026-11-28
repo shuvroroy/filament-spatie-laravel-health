@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Son :count çalıştırma',
     'latest_run' => 'Son çalıştırma',
+    'saved_run' => 'Kaydedilmiş çalıştırma',
+    'back_to_latest' => 'Son sonuçlara dön',
+    'run_unavailable' => 'Bu çalıştırma artık kullanılamıyor.',
 
     'status_labels' => [
         'ok' => 'Başarılı',

@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => ':count pemeriksaan terakhir',
     'latest_run' => 'Pemeriksaan terakhir',
+    'saved_run' => 'Pemeriksaan tersimpan',
+    'back_to_latest' => 'Kembali ke hasil terbaru',
+    'run_unavailable' => 'Hasil pemeriksaan ini sudah tidak tersedia.',
 
     'status_labels' => [
         'ok' => 'Berhasil',
