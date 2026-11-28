@@ -73,6 +73,16 @@ class HealthOverviewWidgetTest extends TestCase
         app()->instance(ResultStore::class, $store);
     }
 
+    private function useCustomHistoryStore(): void
+    {
+        config()->set('health.result_stores', [EloquentHealthResultStore::class => ['model' => DemoHistoryItem::class]]);
+        $migration = require dirname(__DIR__) . '/vendor/spatie/laravel-health/database/migrations/create_health_tables.php.stub';
+        self::assertIsObject($migration);
+        self::assertTrue(is_callable([$migration, 'up']));
+        $migration->up();
+        Schema::table('custom_health_history', fn (Blueprint $table) => $table->renameColumn('id', 'history_key'));
+    }
+
     public function test_widget_links_to_matching_results_and_the_filter_can_be_cleared(): void
     {
         $results = new StoredCheckResults(now()->subMinutes(3));
@@ -97,13 +107,8 @@ class HealthOverviewWidgetTest extends TestCase
     public function test_history_chart_uses_the_configured_model_and_latest_twelve_batches_in_run_order(): void
     {
         FilamentSpatieLaravelHealthPlugin::get()->checkMetadata(['Disk' => ['sample' => 'Disk sample']]);
-        config()->set('health.result_stores', [EloquentHealthResultStore::class => ['model' => DemoHistoryItem::class]]);
+        $this->useCustomHistoryStore();
         config()->set('health.treat_skipped_as_failure', false);
-        $migration = require dirname(__DIR__) . '/vendor/spatie/laravel-health/database/migrations/create_health_tables.php.stub';
-        self::assertIsObject($migration);
-        self::assertTrue(is_callable([$migration, 'up']));
-        $migration->up();
-        Schema::table('custom_health_history', fn (Blueprint $table) => $table->renameColumn('id', 'history_key'));
 
         $day = now()->startOfDay();
         for ($run = 1; $run <= 13; $run++) {
@@ -174,7 +179,7 @@ class HealthOverviewWidgetTest extends TestCase
         $results->addCheck(new StoredCheckResult('Cache', notificationMessage: 'Ready', shortSummary: 'Ok', status: 'ok', meta: ['pending' => 'private-cache']));
         $this->storeResults($results);
 
-        $page = Livewire::test(OperationsHealthPage::class);
+        $page = Livewire::test(OperationsHealthPage::class)->assertDontSee('data-check=');
         $componentId = $page->instance()->getId();
         self::assertIsString($componentId);
         $dialogId = $componentId . '-check-' . sha1('Queue');
@@ -192,6 +197,62 @@ class HealthOverviewWidgetTest extends TestCase
         ]);
         $page->call('$refresh')->assertSee('Pending jobs')->assertSee('Paused')->assertSeeText('false')
             ->assertDontSee('private-token')->assertDontSee('private-cache')->assertDontSee('private-nested')->assertDontSee('Nested metadata')->assertDontSee('Missing value');
+    }
+
+    public function test_the_drawer_loads_only_the_selected_checks_last_twelve_outcomes_on_demand(): void
+    {
+        $this->useCustomHistoryStore();
+        Schema::table('custom_health_history', fn (Blueprint $table) => $table->string('check_name')->collation('NOCASE')->change());
+
+        $day = now()->startOfDay();
+        $diskRuns = [];
+        for ($i = 1; $i <= 16; $i++) {
+            $batch = sprintf('00000000-0000-0000-0000-%012d', 17 - $i);
+            $name = in_array($i, [8, 15], true) ? 'disk' : 'Disk';
+            $time = $day->copy()->addMinutes(intdiv($i, 2));
+            DemoHistoryItem::create([
+                'batch' => $batch, 'check_name' => $name, 'check_label' => $i === 16 ? 'Renamed disk' : 'Volume',
+                'created_at' => $time, 'ended_at' => $time, 'meta' => [], 'short_summary' => '',
+                'status' => $name === 'disk' ? 'crashed' : ($i === 16 ? 'ok' : 'warning'),
+            ]);
+            if ($name === 'Disk') {
+                $diskRuns[] = $batch;
+            }
+        }
+
+        FilamentSpatieLaravelHealthPlugin::get()->authorizeRunChecks(false);
+        DB::enableQueryLog();
+        $page = Livewire::test(OperationsHealthPage::class);
+        $page->assertSee('Renamed disk')->assertSee('View details')->assertDontSee('Recent history');
+        self::assertFalse(collect(DB::getQueryLog())->contains(fn (array $query) => in_array('Disk', $query['bindings'], true)));
+
+        $page->call('checkHistory', 'Disk')->assertReturned(function (string $html) use ($diskRuns, $day): bool {
+            $dom = new \DOMDocument;
+            $dom->loadHTML($html, LIBXML_NOERROR);
+            $links = $dom->getElementsByTagName('a');
+            $expected = array_slice(array_reverse($diskRuns), 0, 12);
+            self::assertCount(count($expected), $links);
+            foreach ($links as $index => $link) {
+                self::assertSame(OperationsHealthPage::getUrl(['run' => $expected[$index]]), $link->getAttribute('href'));
+                self::assertStringContainsString($index === 0 ? 'Passing' : 'Warning', $link->textContent);
+            }
+            self::assertStringContainsString($day->copy()->addMinutes(8)->toIso8601String(), $html);
+
+            return true;
+        });
+        Livewire::withQueryParams(['run' => $diskRuns[2]])->test(OperationsHealthPage::class)
+            ->assertSeeText('Saved run')->assertSeeText('Volume')->assertSee('View details')
+            ->call('checkHistory', 'Disk')->assertReturned(fn (string $html) => str_contains($html, $batch));
+
+        FilamentSpatieLaravelHealthPlugin::get()->authorize(false);
+        $page->call('checkHistory', 'Disk')->assertForbidden();
+    }
+
+    public function test_latest_only_store_omits_history_even_when_requested_directly(): void
+    {
+        $this->storeResults((new StoredCheckResults)->addCheck(new StoredCheckResult('Disk', status: 'ok')));
+        Livewire::test(OperationsHealthPage::class)->assertDontSee('View details')
+            ->call('checkHistory', 'Disk')->assertReturned('');
     }
 
     public function test_a_saved_run_url_on_a_latest_only_store_does_not_display_current_results(): void

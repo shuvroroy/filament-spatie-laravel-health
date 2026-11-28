@@ -7,6 +7,7 @@ return [
     'none_need_attention' => '確認が必要なチェックはありません。',
     'no_results' => 'チェック結果はまだありません。',
 
+    'check_history' => '最近の履歴',
     'recent_runs' => '直近 :count 回',
     'latest_run' => '直近の実行',
     'saved_run' => '保存された実行結果',

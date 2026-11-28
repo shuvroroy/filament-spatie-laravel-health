@@ -17,7 +17,7 @@
         <p>{{ $preview }}</p>
     @endif
 
-    @if ($preview !== $message || $hasAdditionalSummary || $metadata !== [])
+    @if ($hasCheckHistory || $preview !== $message || $hasAdditionalSummary || $metadata !== [])
         @php($dialogId = $this->getId() . '-check-' . sha1($result->name))
         <div class="health-result-actions">
             <x-filament::link tag="button" type="button" size="sm" aria-haspopup="dialog"
@@ -70,6 +70,13 @@
                                 @endforeach
                             </dl>
                         </section>
+                    @endif
+                    @if ($hasCheckHistory)
+                        <div x-data="{ history: null }" data-dialog="{{ $dialogId }}" data-check="{{ $result->name }}"
+                            x-on:open-modal.window="if ($event.detail.id === $el.dataset.dialog) history = await $wire.checkHistory($el.dataset.check)">
+                            <x-filament::loading-indicator x-show="history === null" />
+                            <div x-html="history"></div>
+                        </div>
                     @endif
                 </div>
             </x-filament::modal>

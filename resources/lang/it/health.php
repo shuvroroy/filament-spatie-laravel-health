@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Nessuna verifica richiede attenzione.',
     'no_results' => 'Nessun risultato ancora disponibile.',
 
+    'check_history' => 'Cronologia recente',
     'recent_runs' => 'Ultime :count esecuzioni',
     'latest_run' => 'Ultima esecuzione',
     'saved_run' => 'Esecuzione salvata',

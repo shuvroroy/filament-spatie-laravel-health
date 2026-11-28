@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Keine Prüfung erfordert Aufmerksamkeit.',
     'no_results' => 'Es liegen noch keine Prüfergebnisse vor.',
 
+    'check_history' => 'Letzte Ergebnisse',
     'recent_runs' => 'Letzte :count Durchläufe',
     'latest_run' => 'Letzter Durchlauf',
     'saved_run' => 'Gespeicherter Durchlauf',
