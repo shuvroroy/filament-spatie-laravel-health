@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'Všechny kontroly',
+    'needs_attention' => 'Vyžadují pozornost',
+    'none_need_attention' => 'Žádná kontrola nevyžaduje pozornost.',
+    'no_results' => 'Výsledky kontrol zatím nejsou k dispozici.',
+
+    'recent_runs' => 'Poslední běhy (:count)',
+    'latest_run' => 'Poslední běh',
+
+    'status_labels' => [
+        'ok' => 'V pořádku',
+        'failed' => 'Selhání',
+        'warning' => 'Varování',
+        'crashed' => 'Pád',
+        'skipped' => 'Přeskočeno',
+        'other' => 'Neznámý stav',
+    ],
+
+    'status_counts' => [
+        'ok' => 'V pořádku: :count',
+        'other' => 'Ostatní: :count',
+        'failed' => 'Selhání: :count',
+        'crashed' => 'Pády: :count',
+        'warning' => 'Varování: :count',
+        'skipped' => 'Přeskočeno: :count',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [

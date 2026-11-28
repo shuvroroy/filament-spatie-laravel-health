@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'すべてのチェック',
+    'needs_attention' => '要確認',
+    'none_need_attention' => '確認が必要なチェックはありません。',
+    'no_results' => 'チェック結果はまだありません。',
+
+    'recent_runs' => '直近 :count 回',
+    'latest_run' => '直近の実行',
+
+    'status_labels' => [
+        'ok' => '正常',
+        'failed' => '失敗',
+        'warning' => '警告',
+        'crashed' => '異常終了',
+        'skipped' => 'スキップ',
+        'other' => '不明',
+    ],
+
+    'status_counts' => [
+        'ok' => '正常 :count 件',
+        'other' => 'その他 :count 件',
+        'failed' => '失敗 :count 件',
+        'crashed' => '異常終了 :count 件',
+        'warning' => '警告 :count 件',
+        'skipped' => 'スキップ :count 件',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -16,7 +42,7 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => '結果を確認する',
+                'check_results' => '最終チェック：:lastRanAt',
             ],
         ],
     ],

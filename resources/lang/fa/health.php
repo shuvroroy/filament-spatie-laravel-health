@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'همهٔ بررسی‌ها',
+    'needs_attention' => 'نیازمند توجه',
+    'none_need_attention' => 'هیچ بررسی‌ای به توجه نیاز ندارد.',
+    'no_results' => 'هنوز نتیجه‌ای برای بررسی‌ها ثبت نشده است.',
+
+    'recent_runs' => ':count اجرای اخیر',
+    'latest_run' => 'آخرین اجرا',
+
+    'status_labels' => [
+        'ok' => 'موفق',
+        'failed' => 'ناموفق',
+        'warning' => 'هشدار',
+        'crashed' => 'خطای اجرا',
+        'skipped' => 'ردشده',
+        'other' => 'نامشخص',
+    ],
+
+    'status_counts' => [
+        'ok' => 'موفق: :count',
+        'other' => 'سایر: :count',
+        'failed' => 'ناموفق: :count',
+        'crashed' => 'خطای اجرا: :count',
+        'warning' => 'هشدار: :count',
+        'skipped' => 'ردشده: :count',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -16,7 +42,7 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'بررسی نتایج از',
+                'check_results' => 'آخرین بررسی: :lastRanAt',
             ],
         ],
     ],
