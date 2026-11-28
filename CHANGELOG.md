@@ -2,6 +2,43 @@
 
 All notable changes to `filament-spatie-laravel-health` will be documented in this file.
 
+## v3.5.0 - 2026-11-28
+
+### What's Changed
+
+* Add an opt-in health dashboard widget and filterable results by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/130
+* Open saved health check runs from the dashboard chart by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/131
+* Add check detail slide-overs and group dashboard issues by severity by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/132
+* Separate permission to run health checks from viewing results by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/133
+* Show recent history in the health check details drawer by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/134
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.4.0...v3.5.0
+
+## v3.4.0 - 2026-11-23
+
+### What's Changed
+
+* chore(deps-dev): bump cssnano from 8.0.6 to 8.0.10 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/109
+* chore(deps-dev): bump cssnano from 8.0.10 to 9.0.2 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/110
+* chore(deps-dev): bump cssnano from 9.0.2 to 9.0.4 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/111
+* chore(deps-dev): bump postcss-cli from 11.0.1 to 12.0.0 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/112
+* chore(deps-dev): bump cssnano from 9.0.4 to 9.0.5 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/114
+* chore(deps-dev): bump postcss-nesting from 14.0.1 to 14.0.2 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/115
+* chore(deps-dev): bump cssnano from 9.0.5 to 9.1.2 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/116
+* chore(deps-dev): bump cssnano from 9.1.2 to 9.3.2 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/117
+* chore(deps-dev): bump postcss-nesting from 14.0.2 to 14.0.3 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/118
+* chore(deps-dev): bump postcss from 8.5.28 to 8.5.29 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/119
+* chore(deps): bump shivammathur/setup-php from 2.37.2 to 2.40.0 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/120
+* chore(deps-dev): bump postcss from 8.5.29 to 8.5.30 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/121
+* chore(deps-dev): bump cssnano from 9.3.2 to 9.8.0 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/122
+* chore(deps-dev): bump postcss from 8.5.30 to 8.5.31 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/123
+* chore(deps-dev): bump cssnano from 9.8.0 to 9.9.0 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/124
+* chore(deps): bump stefanzweifel/git-auto-commit-action from 7.2.0 to 7.2.1 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/125
+* chore(deps-dev): bump postcss from 8.5.31 to 8.5.32 by @dependabot[bot] in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/126
+* feat: support PHP 8.6 on Laravel 13 by @shuvroroy in https://github.com/shuvroroy/filament-spatie-laravel-health/pull/127
+
+**Full Changelog**: https://github.com/shuvroroy/filament-spatie-laravel-health/compare/v3.3.3...v3.4.0
+
 ## v3.3.3 - 2026-08-27
 
 ### What's Changed
