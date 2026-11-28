@@ -10,7 +10,7 @@ This package adds a Filament page for monitoring checks registered with [spatie/
 
 | Light mode | Dark mode |
 | --- | --- |
-| ![Application Health in light mode showing one failed check, one warning, and two passing checks](art/results-light.png) | ![The same four health checks in dark mode](art/results-dark.png) |
+| ![Light results page with eight health checks and a View details action on each card](art/results-light.png) | ![Dark results page showing the same three failures, two warnings, and three passing checks](art/results-dark.png) |
 
 ## Installation
 
@@ -91,6 +91,25 @@ Open **Application Health** in the panel to see the latest stored results. Selec
 
 To populate the page for the first time, select **Refresh** or run `php artisan health:check`. Opening the page and switching filters read the stored results. **Refresh** runs the checks again.
 
+### Check details
+
+Cards show **View details** when a message is truncated, a check has an additional summary, or it has metadata configured for display. The slide-over shows the full message and recorded values from the run you opened. Close it to return to the same run and filter.
+
+| Light mode | Dark mode |
+| --- | --- |
+| ![Disk space slide-over with a warning, 86 percent disk usage, and 14 GB available](art/details-light.png) | ![The same disk warning and recorded values in dark mode](art/details-dark.png) |
+
+To display metadata, call `checkMetadata()` in your panel provider. Use the check's stored name as the outer key. For example, a check registered with `->name('Disk')` can expose its disk usage as follows.
+
+```php
+FilamentSpatieLaravelHealthPlugin::make()
+    ->checkMetadata([
+        'Disk' => ['disk_space_used_percentage' => 'Disk used (%)'],
+    ]);
+```
+
+Each field maps a top-level metadata key to its display label. Only configured fields with a non-empty string, number, or boolean value are shown.
+
 ## Optional dashboard widget
 
 Enable the widget in the panel provider for each dashboard where you want it:
@@ -101,9 +120,9 @@ $panel->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
 
 | Light mode | Dark mode |
 | --- | --- |
-| ![Dashboard widget in light mode showing two checks needing attention and the last 12 runs](art/widget-light.png) | ![The same dashboard widget and run history in dark mode](art/widget-dark.png) |
+| ![Light dashboard widget with three failures collapsed and two warnings expanded](art/widget-light.png) | ![Dark dashboard widget with the disk and backup warning messages visible beneath the run chart](art/widget-dark.png) |
 
-The widget reads saved results every minute while visible. It shows the last run time and previews up to two checks per affected status, starting with crashed and failed checks.
+The widget reads saved results every minute while visible. It lists affected checks by severity, starting with crashed and failed checks. A single check shows its message inline. When several checks share a status, the header shows the total and previews up to three names. Expand it to see the full list and each check's message preview.
 
 Select **All checks** in the widget header to open the full list. When checks need attention, select **Needs attention** beside the chart to open the filtered results.
 
