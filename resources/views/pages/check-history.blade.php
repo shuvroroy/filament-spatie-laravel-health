@@ -4,10 +4,8 @@
         <ol class="health-check-history">
             @foreach ($outcomes as $outcome)
                 <li>
-                    <a href="{{ $page::getUrl(['run' => $outcome->batch]) }}">
-                        <time datetime="{{ $outcome->created_at->toIso8601String() }}">{{ $outcome->created_at->isoFormat('lll') }}</time>
-                        <x-filament-spatie-health::status-badge :status="$outcome->status" />
-                    </a>
+                    <time datetime="{{ $outcome->created_at->toIso8601String() }}">{{ $outcome->created_at->isoFormat('lll') }}</time>
+                    <x-filament-spatie-health::status-badge :status="$outcome->status" />
                 </li>
             @endforeach
         </ol>

@@ -210,13 +210,14 @@ class HealthOverviewWidgetTest extends TestCase
             $batch = sprintf('00000000-0000-0000-0000-%012d', 17 - $i);
             $name = in_array($i, [8, 15], true) ? 'disk' : 'Disk';
             $time = $day->copy()->addMinutes(intdiv($i, 2));
+            $status = $name === 'disk' ? 'crashed' : ($i % 2 === 0 ? 'ok' : 'warning');
             DemoHistoryItem::create([
                 'batch' => $batch, 'check_name' => $name, 'check_label' => $i === 16 ? 'Renamed disk' : 'Volume',
                 'created_at' => $time, 'ended_at' => $time, 'meta' => [], 'short_summary' => '',
-                'status' => $name === 'disk' ? 'crashed' : ($i === 16 ? 'ok' : 'warning'),
+                'status' => $status,
             ]);
             if ($name === 'Disk') {
-                $diskRuns[] = $batch;
+                $diskRuns[$batch] = [$time->toIso8601String(), $status === 'ok' ? 'Passing' : 'Warning'];
             }
         }
 
@@ -226,23 +227,25 @@ class HealthOverviewWidgetTest extends TestCase
         $page->assertSee('Renamed disk')->assertSee('View details')->assertDontSee('Recent history');
         self::assertFalse(collect(DB::getQueryLog())->contains(fn (array $query) => in_array('Disk', $query['bindings'], true)));
 
-        $page->call('checkHistory', 'Disk')->assertReturned(function (string $html) use ($diskRuns, $day): bool {
+        $checkRows = function (string $html) use ($diskRuns): bool {
             $dom = new \DOMDocument;
             $dom->loadHTML($html, LIBXML_NOERROR);
-            $links = $dom->getElementsByTagName('a');
-            $expected = array_slice(array_reverse($diskRuns), 0, 12);
-            self::assertCount(count($expected), $links);
-            foreach ($links as $index => $link) {
-                self::assertSame(OperationsHealthPage::getUrl(['run' => $expected[$index]]), $link->getAttribute('href'));
-                self::assertStringContainsString($index === 0 ? 'Passing' : 'Warning', $link->textContent);
+            self::assertCount(0, $dom->getElementsByTagName('a'));
+            $rows = $dom->getElementsByTagName('li');
+            $expected = array_slice(array_reverse(array_values($diskRuns)), 0, 12);
+            self::assertCount(count($expected), $rows);
+            foreach ($rows as $index => $row) {
+                [$timestamp, $label] = $expected[$index];
+                self::assertSame($timestamp, $row->getElementsByTagName('time')->item(0)?->getAttribute('datetime'));
+                self::assertStringContainsString($label, $row->textContent);
             }
-            self::assertStringContainsString($day->copy()->addMinutes(8)->toIso8601String(), $html);
 
             return true;
-        });
-        Livewire::withQueryParams(['run' => $diskRuns[2]])->test(OperationsHealthPage::class)
+        };
+        $page->call('checkHistory', 'Disk')->assertReturned($checkRows);
+        Livewire::withQueryParams(['run' => array_keys($diskRuns)[2]])->test(OperationsHealthPage::class)
             ->assertSeeText('Saved run')->assertSeeText('Volume')->assertSee('View details')
-            ->call('checkHistory', 'Disk')->assertReturned(fn (string $html) => str_contains($html, $batch));
+            ->call('checkHistory', 'Disk')->assertReturned($checkRows);
 
         FilamentSpatieLaravelHealthPlugin::get()->authorize(false);
         $page->call('checkHistory', 'Disk')->assertForbidden();

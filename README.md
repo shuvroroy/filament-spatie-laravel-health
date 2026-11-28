@@ -93,13 +93,13 @@ Select **Run checks** to execute the registered checks and update their results,
 
 ### Check details
 
-Select **View details** to read a check's full message and recorded values from the run you opened. With Spatie's Eloquent result store, every card also includes **Recent history**. It loads the last 12 recorded outcomes for that check by name, newest first. Select a timestamp and status to open the full saved run. Even when viewing an older run, the history shows the most recent outcomes still in storage.
+Select **View details** to read a check's full message and recorded values from the run you opened. With Spatie's Eloquent result store, every card also includes **Recent history**. It loads the last 12 recorded outcomes for that check by name, newest first. Each row shows when the check ran and its status. Even when viewing an older run, the history shows the most recent outcomes still in storage.
 
 With a latest-only store, **View details** appears when the message is truncated, the check has an additional summary, or it has metadata configured for display.
 
 | Light mode | Dark mode |
 | --- | --- |
-| ![Light disk space drawer with recorded values and links to recent outcomes](art/details-light.png) | ![Dark disk space drawer showing the same measurements and recent outcomes](art/details-dark.png) |
+| ![Light disk space drawer with recorded values and recent outcomes](art/details-light.png) | ![Dark disk space drawer showing the same measurements and recent outcomes](art/details-dark.png) |
 
 To display metadata, call `checkMetadata()` in your panel provider. Use the check's stored name as the outer key. For example, a check registered with `->name('Disk')` can expose its disk usage as follows.
 

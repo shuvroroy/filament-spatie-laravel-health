@@ -252,7 +252,7 @@
 .health-check-details dt { color: var(--health-muted); font-size: 0.75rem; }
 .health-check-details dd { margin-block-start: 0.2rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .health-check-history li + li { border-block-start: 1px solid var(--health-rule); }
-.health-check-history a {
+.health-check-history li {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
@@ -261,8 +261,6 @@
     padding: 0.4rem 0.5rem;
     font-variant-numeric: tabular-nums;
 }
-.health-check-history a:is(:hover, :focus-visible) { background: var(--health-inset); }
-.health-check-history a:focus-visible { outline: 2px solid var(--health-accent); outline-offset: -2px; }
 
 @container (max-width: 36rem) {
     .filament-spatie-health .health-run-time {

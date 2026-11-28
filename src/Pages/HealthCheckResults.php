@@ -132,11 +132,10 @@ class HealthCheckResults extends Page
             ->latest('created_at')
             ->orderByDesc($historyItem->getIncrementing() ? $historyItem->getKeyName() : 'batch')
             ->limit(12)
-            ->get(['batch', 'created_at', 'status']);
+            ->get(['created_at', 'status']);
 
         return view('filament-spatie-health::pages.check-history', [
             'outcomes' => $outcomes,
-            'page' => static::class,
         ])->render();
     }
 
