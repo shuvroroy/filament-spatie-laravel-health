@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Rafraîchir',
+                'run_checks' => 'Exécuter les vérifications',
             ],
 
             'heading' => 'Santé de l\'application',

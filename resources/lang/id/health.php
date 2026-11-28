@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Segarkan',
+                'run_checks' => 'Jalankan pemeriksaan',
             ],
 
             'heading' => 'Kesehatan Aplikasi',

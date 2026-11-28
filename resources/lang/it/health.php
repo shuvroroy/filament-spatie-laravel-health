@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Aggiorna',
+                'run_checks' => 'Esegui controlli',
             ],
 
             'heading' => "Salute dell'Applicazione",

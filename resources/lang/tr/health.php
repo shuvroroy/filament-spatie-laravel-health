@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Yenile',
+                'run_checks' => 'Kontrolleri çalıştır',
             ],
 
             'heading' => 'Uygulama Sağlığı',

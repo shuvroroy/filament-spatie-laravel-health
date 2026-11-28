@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Làm mới',
+                'run_checks' => 'Chạy kiểm tra',
             ],
 
             'heading' => 'Tình trạng ứng dụng',

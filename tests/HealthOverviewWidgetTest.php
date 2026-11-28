@@ -22,6 +22,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
+use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\Models\HealthCheckResultHistoryItem;
 use Spatie\Health\ResultStores\EloquentHealthResultStore;
 use Spatie\Health\ResultStores\ResultStore;
@@ -148,7 +149,7 @@ class HealthOverviewWidgetTest extends TestCase
         $chart->assertSee(OperationsHealthPage::getUrl($params));
         $page = Livewire::withQueryParams($params)->test(OperationsHealthPage::class);
         $page->assertSee('Saved run')->assertSee($day->copy()->addMinutes(3)->isoFormat('LLL'))
-            ->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->assertSee('Back to latest')->assertDontSeeText('Run checks')
             ->assertSee('View details')->assertSee('Disk sample')->assertSee('Measurement 3.')->assertDontSee('Measurement 13.')
             ->assertSee('Disk from run 3')->assertDontSee('Database from run 3')->assertDontSee('Disk from run 13')
             ->set('needsAttention', false)->assertSee('Database from run 3')->assertSet('run', $batch);
@@ -221,7 +222,7 @@ class HealthOverviewWidgetTest extends TestCase
         app()->instance(ResultStore::class, $store);
 
         Livewire::withQueryParams(['run' => $selector])->test(OperationsHealthPage::class)
-            ->assertSee('This run is no longer available.')->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->assertSee('This run is no longer available.')->assertSee('Back to latest')->assertDontSeeText('Run checks')
             ->call('$refresh')->assertSee('This run is no longer available.');
     }
 
@@ -274,6 +275,33 @@ class HealthOverviewWidgetTest extends TestCase
         Livewire::test(HealthOverviewWidget::class)->assertForbidden();
         Livewire::withQueryParams(['run' => '00000000-0000-0000-0000-000000000001'])->test(OperationsHealthPage::class)
             ->assertForbidden();
+    }
+
+    public function test_read_only_users_can_view_results_but_cannot_trigger_a_run(): void
+    {
+        $this->storeResults((new StoredCheckResults)->addCheck(new StoredCheckResult('Disk', status: 'warning')));
+        FilamentSpatieLaravelHealthPlugin::get()->authorizeRunChecks(false);
+        $kernel = $this->createMock(Kernel::class);
+        $kernel->expects(self::never())->method('call');
+        Artisan::swap($kernel);
+
+        Livewire::test(OperationsHealthPage::class)
+            ->assertSeeText('Disk')->assertDontSeeText('Run checks')
+            ->call('refresh')->assertForbidden();
+    }
+
+    public function test_an_operator_can_run_checks_and_permission_is_rechecked_after_render(): void
+    {
+        $this->storeResults(null);
+        $plugin = FilamentSpatieLaravelHealthPlugin::get()->authorizeRunChecks(fn (): bool => true);
+        $kernel = $this->createMock(Kernel::class);
+        $kernel->expects(self::once())->method('call')->with(RunHealthChecksCommand::class)->willReturn(0);
+        Artisan::swap($kernel);
+
+        $page = Livewire::test(OperationsHealthPage::class)->assertSeeText('Run checks');
+        $page->call('refresh')->assertDispatched('refresh-component');
+        $plugin->authorizeRunChecks(fn (): bool => false);
+        $page->call('refresh')->assertForbidden();
     }
 
     public function test_widget_respects_the_custom_pages_access_rule(): void

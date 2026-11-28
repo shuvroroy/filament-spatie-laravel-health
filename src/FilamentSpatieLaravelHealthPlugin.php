@@ -21,6 +21,8 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     protected bool | Closure $authorizeUsing = true;
 
+    protected bool | Closure $authorizeRunChecksUsing = true;
+
     protected bool $hasDashboardWidget = false;
 
     /** @var array<string, array<string, string>> */
@@ -98,6 +100,18 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     public function isAuthorized(): bool
     {
         return $this->evaluate($this->authorizeUsing) === true;
+    }
+
+    public function authorizeRunChecks(bool | Closure $callback = true): static
+    {
+        $this->authorizeRunChecksUsing = $callback;
+
+        return $this;
+    }
+
+    public function isAuthorizedToRunChecks(): bool
+    {
+        return $this->isAuthorized() && $this->evaluate($this->authorizeRunChecksUsing) === true;
     }
 
     public static function get(): static

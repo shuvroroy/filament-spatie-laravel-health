@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'بروز‌رسانی',
+                'run_checks' => 'اجرای بررسی‌ها',
             ],
 
             'heading' => 'سلامت‌برنامه',

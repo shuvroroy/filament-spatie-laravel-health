@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Обновить',
+                'run_checks' => 'Запустить проверки',
             ],
 
             'heading' => 'Состояние приложения',

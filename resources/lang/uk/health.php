@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Оновити',
+                'run_checks' => 'Запустити перевірки',
             ],
 
             'heading' => 'Стан застосунку',

@@ -44,6 +44,7 @@ return [
         'health_check_results' => [
             'buttons' => [
                 'refresh' => 'Refresh',
+                'run_checks' => 'Run checks',
             ],
 
             'heading' => 'Application Health',
