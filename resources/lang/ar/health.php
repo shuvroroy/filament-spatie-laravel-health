@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'آخر :count عمليات فحص',
     'latest_run' => 'آخر عملية فحص',
     'saved_run' => 'تشغيل محفوظ',
+    'view_details' => 'عرض التفاصيل',
+    'recorded_values' => 'القيم المسجّلة',
     'back_to_latest' => 'العودة إلى أحدث النتائج',
     'run_unavailable' => 'لم يعد هذا التشغيل متاحًا.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'تعطّل',
         'skipped' => 'تم تخطيه',
         'other' => 'غير معروف',
+    ],
+
+    'status_groups' => [
+        'failed' => 'حالات الفشل',
+        'warning' => 'التحذيرات',
+        'crashed' => 'الفحوصات المتعطلة',
+        'skipped' => 'الفحوصات المتخطاة',
     ],
 
     'status_counts' => [

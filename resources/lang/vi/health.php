@@ -10,6 +10,8 @@ return [
     'recent_runs' => ':count lần chạy gần nhất',
     'latest_run' => 'Lần chạy gần nhất',
     'saved_run' => 'Lần chạy đã lưu',
+    'view_details' => 'Xem chi tiết',
+    'recorded_values' => 'Giá trị đã ghi nhận',
     'back_to_latest' => 'Quay lại kết quả mới nhất',
     'run_unavailable' => 'Lần chạy này không còn khả dụng.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Lỗi thực thi',
         'skipped' => 'Bỏ qua',
         'other' => 'Không rõ',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Kiểm tra thất bại',
+        'warning' => 'Cảnh báo',
+        'crashed' => 'Kiểm tra bị lỗi',
+        'skipped' => 'Kiểm tra đã bỏ qua',
     ],
 
     'status_counts' => [

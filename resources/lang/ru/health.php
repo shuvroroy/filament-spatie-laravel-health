@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Последние запуски (:count)',
     'latest_run' => 'Последний запуск',
     'saved_run' => 'Сохранённый запуск',
+    'view_details' => 'Подробнее',
+    'recorded_values' => 'Записанные значения',
     'back_to_latest' => 'К последним результатам',
     'run_unavailable' => 'Этот запуск больше недоступен.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Сбой',
         'skipped' => 'Пропущено',
         'other' => 'Неизвестно',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Ошибки',
+        'warning' => 'Предупреждения',
+        'crashed' => 'Аварийно завершённые проверки',
+        'skipped' => 'Пропущенные проверки',
     ],
 
     'status_counts' => [

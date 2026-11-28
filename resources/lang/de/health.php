@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Letzte :count Durchläufe',
     'latest_run' => 'Letzter Durchlauf',
     'saved_run' => 'Gespeicherter Durchlauf',
+    'view_details' => 'Details anzeigen',
+    'recorded_values' => 'Erfasste Werte',
     'back_to_latest' => 'Zu den aktuellen Ergebnissen',
     'run_unavailable' => 'Dieser Durchlauf ist nicht mehr verfügbar.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Abgestürzt',
         'skipped' => 'Übersprungen',
         'other' => 'Unbekannt',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Fehler',
+        'warning' => 'Warnungen',
+        'crashed' => 'Abgestürzte Prüfungen',
+        'skipped' => 'Übersprungene Prüfungen',
     ],
 
     'status_counts' => [

@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Laatste :count uitvoeringen',
     'latest_run' => 'Laatste uitvoering',
     'saved_run' => 'Opgeslagen controle',
+    'view_details' => 'Details bekijken',
+    'recorded_values' => 'Vastgelegde waarden',
     'back_to_latest' => 'Terug naar de laatste resultaten',
     'run_unavailable' => 'Deze controle is niet meer beschikbaar.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Gecrasht',
         'skipped' => 'Overgeslagen',
         'other' => 'Onbekend',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Mislukte controles',
+        'warning' => 'Waarschuwingen',
+        'crashed' => 'Gecrashte controles',
+        'skipped' => 'Overgeslagen controles',
     ],
 
     'status_counts' => [

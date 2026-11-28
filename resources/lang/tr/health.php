@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Son :count çalıştırma',
     'latest_run' => 'Son çalıştırma',
     'saved_run' => 'Kaydedilmiş çalıştırma',
+    'view_details' => 'Ayrıntıları görüntüle',
+    'recorded_values' => 'Kaydedilen değerler',
     'back_to_latest' => 'Son sonuçlara dön',
     'run_unavailable' => 'Bu çalıştırma artık kullanılamıyor.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Çalıştırma hatası',
         'skipped' => 'Atlandı',
         'other' => 'Bilinmiyor',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Başarısız kontroller',
+        'warning' => 'Uyarılar',
+        'crashed' => 'Çöken kontroller',
+        'skipped' => 'Atlanan kontroller',
     ],
 
     'status_counts' => [

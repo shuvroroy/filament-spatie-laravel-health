@@ -10,6 +10,8 @@ return [
     'recent_runs' => 'Останні запуски (:count)',
     'latest_run' => 'Останній запуск',
     'saved_run' => 'Збережений запуск',
+    'view_details' => 'Переглянути подробиці',
+    'recorded_values' => 'Записані значення',
     'back_to_latest' => 'До останніх результатів',
     'run_unavailable' => 'Цей запуск більше недоступний.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Збій',
         'skipped' => 'Пропущено',
         'other' => 'Невідомо',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Помилки',
+        'warning' => 'Попередження',
+        'crashed' => 'Аварійно завершені перевірки',
+        'skipped' => 'Пропущені перевірки',
     ],
 
     'status_counts' => [

@@ -10,6 +10,8 @@ return [
     'recent_runs' => ':count dernières exécutions',
     'latest_run' => 'Dernière exécution',
     'saved_run' => 'Exécution enregistrée',
+    'view_details' => 'Voir les détails',
+    'recorded_values' => 'Valeurs enregistrées',
     'back_to_latest' => 'Revenir aux derniers résultats',
     'run_unavailable' => 'Cette exécution n’est plus disponible.',
 
@@ -20,6 +22,13 @@ return [
         'crashed' => 'Erreur d’exécution',
         'skipped' => 'Ignorée',
         'other' => 'Inconnu',
+    ],
+
+    'status_groups' => [
+        'failed' => 'Échecs',
+        'warning' => 'Avertissements',
+        'crashed' => 'Contrôles interrompus',
+        'skipped' => 'Contrôles ignorés',
     ],
 
     'status_counts' => [
