@@ -8,7 +8,12 @@
 
 This package adds a Filament page for monitoring checks registered with [spatie/laravel-health](https://spatie.be/docs/laravel-health/v1/introduction). It supports Filament 4 and 5 and PHP 8.2 or newer. CI tests PHP 8.6 with Laravel 13.
 
-<img width="1486" alt="Screenshot 2023-08-04 at 10 06 01 PM" src="https://github.com/shuvroroy/filament-spatie-laravel-health/assets/21066418/fe0b9b55-04ef-4ea9-b89f-bd6e0cf0964a">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="art/results-dark.png">
+  <img src="art/results-light.png" alt="Application Health results showing a failed queue check, a disk warning, and two passing checks">
+</picture>
+
+View the results page in [light mode](art/results-light.png) or [dark mode](art/results-dark.png).
 
 ## Installation
 
@@ -82,6 +87,35 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 See the [available checks](https://spatie.be/docs/laravel-health/v1/available-checks/overview) in the Laravel Health documentation.
+
+## Viewing results
+
+Open **Application Health** in the panel to see the latest stored results. Select **Needs attention** to show warnings, failures, and crashed checks. Skipped checks also appear when Spatie's `health.treat_skipped_as_failure` setting is enabled (the default). The filtered URL can be bookmarked or shared with another authorized user.
+
+To populate the page for the first time, select **Refresh** or run `php artisan health:check`. Opening the page and switching filters read the stored results. **Refresh** runs the checks again.
+
+## Optional dashboard widget
+
+Enable the widget in the panel provider for each dashboard where you want it:
+
+```php
+$panel->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
+```
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="art/widget-dark.png">
+  <img src="art/widget-light.png" width="552" alt="Dashboard widget with two of four checks needing attention, a 12-run history chart, and messages for the queue and disk checks">
+</picture>
+
+View the widget in [light mode](art/widget-light.png) or [dark mode](art/widget-dark.png).
+
+The widget reads saved results every minute while visible. It shows the last run time and previews up to two checks per affected status, starting with crashed and failed checks.
+
+Select **All checks** in the widget header to open the full list. When checks need attention, select **Needs attention** beside the chart to open the filtered results.
+
+With Spatie's Eloquent store active and at least two recorded runs, the chart shows how many checks needed attention in each of the most recent runs (up to 12, oldest first). Hover, tap, or focus a bar for the run time and affected count out of the total. With one run or a latest-only store, the widget shows a status breakdown of the latest results.
+
+The widget respects the plugin's authorization callback and the configured results page's access rules.
 
 ## Customising the navigation
 
