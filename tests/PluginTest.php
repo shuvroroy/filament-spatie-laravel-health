@@ -96,10 +96,11 @@ class PluginTest extends TestCase
     {
         $this->panel->registerAssets();
 
-        $styles = FilamentAsset::getStyles(['filament-spatie-health']);
+        $styles = FilamentAsset::getStyles(['shuvroroy/filament-spatie-laravel-health']);
         self::assertCount(1, $styles);
         self::assertSame('filament-spatie-health-styles', $styles[0]->getId());
         self::assertStringEndsWith('/resources/dist/plugin.css', (string) $styles[0]->getPath());
+        self::assertStringContainsString('/css/shuvroroy/filament-spatie-laravel-health/filament-spatie-health-styles.css?v=', $styles[0]->getHref());
         self::assertFalse($styles[0]->isLoadedOnRequest());
     }
 

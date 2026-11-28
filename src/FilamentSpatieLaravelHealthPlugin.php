@@ -41,7 +41,7 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
             ->pages([$this->getPage()])
             ->assets([
                 Css::make('filament-spatie-health-styles', __DIR__ . '/../resources/dist/plugin.css'),
-            ], package: $this->getId());
+            ], package: 'shuvroroy/filament-spatie-laravel-health');
 
         if ($this->hasDashboardWidget) {
             $panel->widgets([HealthOverviewWidget::class]);
