@@ -20,30 +20,43 @@
             @include('filament-spatie-health::widgets.health-chart')
         @endif
         @if ($attentionCount)
-            <dl class="health-status-groups">
+            <div class="health-status-groups">
                 @foreach ($checksByStatus as $status => $checks)
-                    <div class="health-status-group" data-severity="{{ $status }}">
-                        <dt>
-                            <x-filament-spatie-health::status-badge :status="$status" :count="$checks->count()" />
-                        </dt>
-                        <dd>
-                            <ul class="health-check-list">
-                                @foreach ($checks->take(2) as $check)
-                                    <li>
-                                        <x-filament-spatie-health::check-icon :name="$check->name" class="health-row-icon" />
-                                        <div>
-                                            <strong>{{ $check->label ?: $check->name }}</strong>
-                                            @if (filled($message = $check->notificationMessage ?: $check->shortSummary))
-                                                <p>{{ \Illuminate\Support\Str::limit($message, 160) }}</p>
-                                            @endif
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </dd>
+                    <div class="health-status-group" data-severity="{{ $status }}" wire:key="health-group-{{ $status }}">
+                        @if ($checks->count() > 1)
+                            <details class="health-group-disclosure" wire:ignore.self>
+                                <summary>
+                                    <strong class="health-group-heading">
+                                        <x-filament::icon :icon="match ($status) {
+                                            'failed' => 'heroicon-o-x-circle',
+                                            'warning' => 'heroicon-o-exclamation-triangle',
+                                            'crashed' => 'heroicon-o-bolt',
+                                            'skipped' => 'heroicon-o-forward',
+                                        }" aria-hidden="true" />
+                                        {{ __('filament-spatie-health::health.status_groups.' . $status) }}
+                                        <span class="health-group-count">{{ $checks->count() }}</span>
+                                    </strong>
+                                    <x-filament::icon icon="heroicon-m-chevron-down" class="health-group-chevron" aria-hidden="true" />
+                                    <span class="health-group-preview">
+                                        @foreach ($checks->take(3) as $check)
+                                            <span class="health-group-check">
+                                                <x-filament-spatie-health::check-icon :name="$check->name" />
+                                                <span>{{ $check->label ?: $check->name }}</span>
+                                            </span>
+                                        @endforeach
+                                        @if ($checks->count() > 3)
+                                            <span>+{{ $checks->count() - 3 }}</span>
+                                        @endif
+                                    </span>
+                                </summary>
+                                @include('filament-spatie-health::widgets.health-check-list')
+                            </details>
+                        @else
+                            @include('filament-spatie-health::widgets.health-check-list')
+                        @endif
                     </div>
                 @endforeach
-            </dl>
+            </div>
         @else
             <p class="health-empty-state">
                 <x-filament::icon :icon="$totalCount ? 'heroicon-o-check-circle' : 'heroicon-o-clock'" aria-hidden="true" />

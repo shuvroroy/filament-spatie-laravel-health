@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
@@ -94,6 +95,7 @@ class HealthOverviewWidgetTest extends TestCase
 
     public function test_history_chart_uses_the_configured_model_and_latest_twelve_batches_in_run_order(): void
     {
+        FilamentSpatieLaravelHealthPlugin::get()->checkMetadata(['Disk' => ['sample' => 'Disk sample']]);
         config()->set('health.result_stores', [EloquentHealthResultStore::class => ['model' => DemoHistoryItem::class]]);
         config()->set('health.treat_skipped_as_failure', false);
         $migration = require dirname(__DIR__) . '/vendor/spatie/laravel-health/database/migrations/create_health_tables.php.stub';
@@ -110,7 +112,7 @@ class HealthOverviewWidgetTest extends TestCase
             foreach (['Database' => 'ok', 'Disk' => $run % 2 ? 'warning' : 'ok', 'Queue' => 'skipped'] as $name => $status) {
                 DemoHistoryItem::create([
                     'batch' => $batch, 'check_name' => $name, 'check_label' => $name, 'status' => $status,
-                    'short_summary' => "{$name} from run {$run}", 'meta' => [], 'ended_at' => $time, 'created_at' => $time,
+                    'short_summary' => "{$name} from run {$run}", 'meta' => ['sample' => "Measurement {$run}."], 'ended_at' => $time, 'created_at' => $time,
                 ]);
             }
 
@@ -147,6 +149,7 @@ class HealthOverviewWidgetTest extends TestCase
         $page = Livewire::withQueryParams($params)->test(OperationsHealthPage::class);
         $page->assertSee('Saved run')->assertSee($day->copy()->addMinutes(3)->isoFormat('LLL'))
             ->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->assertSee('View details')->assertSee('Disk sample')->assertSee('Measurement 3.')->assertDontSee('Measurement 13.')
             ->assertSee('Disk from run 3')->assertDontSee('Database from run 3')->assertDontSee('Disk from run 13')
             ->set('needsAttention', false)->assertSee('Database from run 3')->assertSet('run', $batch);
         $kernel = $this->createMock(Kernel::class);
@@ -158,6 +161,28 @@ class HealthOverviewWidgetTest extends TestCase
 
         Livewire::withQueryParams(['run' => 'invalid'])->test(OperationsHealthPage::class)
             ->assertSee('This run is no longer available.');
+    }
+
+    public function test_check_details_only_offer_additional_information_and_allowed_metadata(): void
+    {
+        $message = str_repeat('Timeout waiting for a worker. ', 8) . '<script>alert(1)</script>';
+        $results = new StoredCheckResults;
+        $results->addCheck(new StoredCheckResult('Queue', 'Queue workers', $message, 'Five pending jobs', 'failed', [
+            'pending' => 0, 'paused' => false, 'internal' => 'private-token', 'nested' => ['secret' => 'private-nested'],
+        ]));
+        $results->addCheck(new StoredCheckResult('Cache', notificationMessage: 'Ready', shortSummary: 'Ok', status: 'ok', meta: ['pending' => 'private-cache']));
+        $this->storeResults($results);
+
+        $page = Livewire::test(OperationsHealthPage::class);
+        $page->assertSee('Five pending jobs')->assertSee($message)->assertSee(Str::limit($message, 160))
+            ->assertDontSee($message, false)->assertDontSee('private-token')->assertDontSee('private-cache');
+        self::assertSame(1, substr_count($page->html(), 'class="filament-spatie-health health-check-details"'));
+
+        FilamentSpatieLaravelHealthPlugin::get()->checkMetadata([
+            'Queue' => ['pending' => 'Pending jobs', 'paused' => 'Paused', 'nested' => 'Nested metadata', 'absent' => 'Missing value'],
+        ]);
+        $page->call('$refresh')->assertSee('Pending jobs')->assertSee('Paused')->assertSeeText('false')
+            ->assertDontSee('private-token')->assertDontSee('private-cache')->assertDontSee('private-nested')->assertDontSee('Nested metadata')->assertDontSee('Missing value');
     }
 
     public function test_a_saved_run_url_on_a_latest_only_store_does_not_display_current_results(): void
@@ -203,7 +228,7 @@ class HealthOverviewWidgetTest extends TestCase
             ->set('needsAttention', true)->assertDontSeeText('Optional')->assertSee('No checks need attention.');
     }
 
-    public function test_widget_previews_two_checks_per_status_in_severity_order_and_picks_up_new_results(): void
+    public function test_widget_groups_multiple_checks_by_severity_and_shows_a_single_check_inline_after_refresh(): void
     {
         $results = new StoredCheckResults;
         $results->addCheck(new StoredCheckResult('Disk', 'Disk space', shortSummary: '86% used', status: 'warning'));
@@ -214,12 +239,12 @@ class HealthOverviewWidgetTest extends TestCase
         $this->storeResults($results);
 
         $widget = Livewire::test(HealthOverviewWidget::class);
-        $widget->assertSeeInOrder(['Offsite backups', '3 failed', 'Redis connection', 'Connection refused', 'Database', 'Disk space', '86% used'])
-            ->assertDontSeeText('Background queue')
+        $widget->assertSeeInOrder(['Offsite backups', 'Failures', '<span class="health-group-count">3</span>', 'Redis connection', 'Connection refused', 'Database', 'Disk space', '86% used'], false)
+            ->assertSee('Background queue')->assertSee('health-group-disclosure')
             ->assertSee('wire:poll.visible.60s', false);
 
         $results->storedCheckResults = $results->storedCheckResults->where('name', 'Queue');
-        $widget->call('$refresh')->assertSee('1 failed')->assertSee('Needs attention (1)')->assertSee('Background queue')->assertDontSeeText('Connection refused');
+        $widget->call('$refresh')->assertSee('1 failed')->assertSee('Needs attention (1)')->assertSee('Background queue')->assertDontSeeText('Connection refused')->assertDontSee('health-group-disclosure');
     }
 
     public function test_widget_and_page_handle_a_store_with_no_results(): void
