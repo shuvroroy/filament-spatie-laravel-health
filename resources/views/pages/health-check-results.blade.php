@@ -1,5 +1,5 @@
 <x-filament-panels::page>
-    <div class="filament-spatie-health" x-data="{}" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-spatie-health-styles', package: 'filament-spatie-health'))]">
+    <div class="filament-spatie-health">
         <div class="health-results-toolbar">
             <div class="health-filter-tabs" role="group" aria-label="{{ __('filament-spatie-health::health.pages.health_check_results.heading') }}">
                 <button type="button" aria-pressed="{{ $needsAttention ? 'false' : 'true' }}" wire:click="$set('needsAttention', false)">

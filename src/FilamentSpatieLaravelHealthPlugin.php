@@ -6,6 +6,7 @@ use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Pages\Page;
 use Filament\Panel;
+use Filament\Support\Assets\Css;
 use Filament\Support\Concerns\EvaluatesClosures;
 use LogicException;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
@@ -36,7 +37,11 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->pages([$this->getPage()]);
+        $panel
+            ->pages([$this->getPage()])
+            ->assets([
+                Css::make('filament-spatie-health-styles', __DIR__ . '/../resources/dist/plugin.css'),
+            ], package: $this->getId());
 
         if ($this->hasDashboardWidget) {
             $panel->widgets([HealthOverviewWidget::class]);

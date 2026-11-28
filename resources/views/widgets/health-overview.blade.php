@@ -1,9 +1,4 @@
-<x-filament-widgets::widget
-    class="filament-spatie-health-overview"
-    wire:poll.visible.60s
-    x-data="{}"
-    :x-load-css="\Illuminate\Support\Js::from([\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-spatie-health-styles', package: 'filament-spatie-health')])->toHtml()"
->
+<x-filament-widgets::widget class="filament-spatie-health-overview" wire:poll.visible.60s>
     <section class="health-card">
         <header class="health-card-header">
             <span class="health-card-icon" aria-hidden="true">

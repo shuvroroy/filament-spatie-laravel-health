@@ -30,12 +30,6 @@ php artisan vendor:publish --tag="health-migrations"
 php artisan migrate
 ```
 
-Publish Filament's assets:
-
-```bash
-php artisan filament:assets
-```
-
 ## Usage
 
 Register the plugin in your Filament panel provider, such as `AdminPanelProvider`:
@@ -58,6 +52,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(FilamentSpatieLaravelHealthPlugin::make());
     }
 }
+```
+
+After registering the plugin, publish the panel assets:
+
+```bash
+php artisan filament:assets
 ```
 
 Register your health checks in the `boot()` method of `app/Providers/AppServiceProvider.php`:
