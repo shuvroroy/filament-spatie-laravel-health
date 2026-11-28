@@ -13,6 +13,8 @@ use Spatie\Health\ResultStores\ResultStore;
 
 class HealthOverviewWidget extends Widget
 {
+    private const HISTORY_RUNS = 12;
+
     protected string $view = 'filament-spatie-health::widgets.health-overview';
 
     public static function canView(): bool
@@ -56,15 +58,50 @@ class HealthOverviewWidget extends Widget
         $placeholders = implode(', ', array_fill(0, count($statuses), '?'));
 
         return $model::query()
+            ->whereIn('batch', $this->recentBatchIds($model))
             ->select('batch')
             ->selectRaw('MAX(created_at) AS created_at, COUNT(*) AS total_count')
             ->selectRaw("SUM(CASE WHEN status IN ({$placeholders}) THEN 1 ELSE 0 END) AS attention_count", $statuses)
             ->groupBy('batch')
-            ->orderByDesc('created_at')
-            ->orderByRaw('MAX(id) DESC')
-            ->limit(12)
-            ->get()
-            ->reverse()
-            ->values();
+            ->orderBy('created_at')
+            ->orderBy('batch')
+            ->get();
+    }
+
+    /**
+     * @param  class-string<HealthCheckResultHistoryItem>  $model
+     * @return list<string>
+     */
+    private function recentBatchIds(string $model): array
+    {
+        $batches = [];
+        $before = null;
+
+        do {
+            // Read complete groups of timestamps so runs tied at the cutoff are ranked together.
+            $times = $model::query()
+                ->when($before !== null, fn ($query) => $query->where('created_at', '<', $before))
+                ->distinct()
+                ->latest('created_at')
+                ->limit(self::HISTORY_RUNS)
+                ->toBase()
+                ->pluck('created_at');
+
+            $runs = $model::query()
+                ->whereIn('created_at', $times)
+                ->whereNotIn('batch', $batches)
+                ->groupBy('batch')
+                ->orderByRaw('MAX(created_at) DESC')
+                ->orderByDesc('batch')
+                ->limit(self::HISTORY_RUNS - count($batches))
+                ->get(['batch']);
+
+            foreach ($runs as $run) {
+                $batches[] = $run->batch;
+            }
+            $before = $times->last();
+        } while ($times->count() === self::HISTORY_RUNS && count($batches) < self::HISTORY_RUNS);
+
+        return $batches;
     }
 }

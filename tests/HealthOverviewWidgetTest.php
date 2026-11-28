@@ -10,7 +10,10 @@ use Filament\Panel;
 use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
@@ -26,6 +29,8 @@ class OperationsHealthPage extends HealthCheckResults {}
 class DemoHistoryItem extends HealthCheckResultHistoryItem
 {
     protected $table = 'custom_health_history';
+
+    protected $primaryKey = 'history_key';
 }
 
 class HealthOverviewWidgetTest extends TestCase
@@ -92,9 +97,12 @@ class HealthOverviewWidgetTest extends TestCase
         self::assertIsObject($migration);
         self::assertTrue(is_callable([$migration, 'up']));
         $migration->up();
+        Schema::table('custom_health_history', fn (Blueprint $table) => $table->renameColumn('id', 'history_key'));
 
+        $day = now()->startOfDay();
         for ($run = 1; $run <= 13; $run++) {
-            $time = now()->startOfDay()->addMinutes($run);
+            // The two oldest runs tie at the chart boundary.
+            $time = $day->copy()->addMinutes(max(2, $run));
             $batch = sprintf('00000000-0000-0000-0000-%012d', $run);
             foreach (['Database' => 'ok', 'Disk' => $run % 2 ? 'warning' : 'ok', 'Queue' => 'skipped'] as $name => $status) {
                 DemoHistoryItem::create([
@@ -108,10 +116,26 @@ class HealthOverviewWidgetTest extends TestCase
             }
         }
 
+        // One run spans more than twelve timestamps. An older check still belongs to run two.
+        $row = DemoHistoryItem::query()->where('batch', $batch)->where('status', 'ok')->firstOrFail()->getAttributes();
+        unset($row['history_key']);
+        for ($minute = 14; $minute <= 26; $minute++) {
+            $row['created_at'] = $day->copy()->addMinutes($minute);
+            DemoHistoryItem::query()->insert($row);
+        }
+        $row['batch'] = '00000000-0000-0000-0000-000000000002';
+        $row['created_at'] = $day->copy()->subDay();
+        DemoHistoryItem::query()->insert($row);
+
+        DB::enableQueryLog();
         $chart = Livewire::test(HealthOverviewWidget::class);
+        $aggregate = collect(DB::getQueryLog())->first(fn (array $query): bool => str_contains($query['query'], 'AS attention_count'));
+        self::assertNotNull($aggregate);
+        self::assertContains($row['batch'], $aggregate['bindings']);
+        self::assertNotContains('00000000-0000-0000-0000-000000000001', $aggregate['bindings']);
         $chart->assertSee('Last 12 runs')->assertDontSee('Latest run')
             ->assertDontSee('health-run-00000000-0000-0000-0000-000000000001')
-            ->assertSeeInOrder(['health-run-00000000-0000-0000-0000-000000000002', 'Needs attention 0/3', 'health-run-00000000-0000-0000-0000-000000000003', 'Needs attention 1/3']);
+            ->assertSeeInOrder(['health-run-00000000-0000-0000-0000-000000000002', 'Needs attention 0/4', 'health-run-00000000-0000-0000-0000-000000000003', 'Needs attention 1/3']);
         self::assertSame(12, substr_count($chart->html(), 'class="health-run-bar"'));
     }
 
