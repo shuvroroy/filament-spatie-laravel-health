@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'Semua pemeriksaan',
+    'needs_attention' => 'Perlu perhatian',
+    'none_need_attention' => 'Tidak ada pemeriksaan yang memerlukan perhatian.',
+    'no_results' => 'Belum ada hasil pemeriksaan.',
+
+    'recent_runs' => ':count pemeriksaan terakhir',
+    'latest_run' => 'Pemeriksaan terakhir',
+
+    'status_labels' => [
+        'ok' => 'Berhasil',
+        'failed' => 'Gagal',
+        'warning' => 'Peringatan',
+        'crashed' => 'Galat eksekusi',
+        'skipped' => 'Dilewati',
+        'other' => 'Tidak diketahui',
+    ],
+
+    'status_counts' => [
+        'ok' => ':count berhasil',
+        'other' => ':count lainnya',
+        'failed' => ':count gagal',
+        'crashed' => ':count mengalami galat',
+        'warning' => ':count peringatan',
+        'skipped' => ':count dilewati',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [

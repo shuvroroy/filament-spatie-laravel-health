@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'All checks',
+    'needs_attention' => 'Needs attention',
+    'none_need_attention' => 'No checks need attention.',
+    'no_results' => 'No check results available yet.',
+
+    'recent_runs' => 'Last :count runs',
+    'latest_run' => 'Latest run',
+
+    'status_labels' => [
+        'ok' => 'Passing',
+        'failed' => 'Failed',
+        'warning' => 'Warning',
+        'crashed' => 'Crashed',
+        'skipped' => 'Skipped',
+        'other' => 'Unknown',
+    ],
+
+    'status_counts' => [
+        'ok' => ':count passing',
+        'other' => ':count other',
+        'failed' => ':count failed',
+        'crashed' => ':count crashed',
+        'warning' => ':count warning|:count warnings',
+        'skipped' => ':count skipped',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [

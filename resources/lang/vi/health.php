@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'Tất cả kiểm tra',
+    'needs_attention' => 'Cần chú ý',
+    'none_need_attention' => 'Không có kiểm tra nào cần chú ý.',
+    'no_results' => 'Chưa có kết quả kiểm tra.',
+
+    'recent_runs' => ':count lần chạy gần nhất',
+    'latest_run' => 'Lần chạy gần nhất',
+
+    'status_labels' => [
+        'ok' => 'Thành công',
+        'failed' => 'Thất bại',
+        'warning' => 'Cảnh báo',
+        'crashed' => 'Lỗi thực thi',
+        'skipped' => 'Bỏ qua',
+        'other' => 'Không rõ',
+    ],
+
+    'status_counts' => [
+        'ok' => ':count thành công',
+        'other' => ':count khác',
+        'failed' => ':count thất bại',
+        'crashed' => ':count lỗi thực thi',
+        'warning' => ':count cảnh báo',
+        'skipped' => ':count bị bỏ qua',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -16,7 +42,7 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'Kết quả được kiểm tra từ',
+                'check_results' => 'Lần kiểm tra gần nhất: :lastRanAt',
             ],
         ],
     ],

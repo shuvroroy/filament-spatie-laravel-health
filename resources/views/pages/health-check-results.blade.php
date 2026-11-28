@@ -1,68 +1,45 @@
-@php
-    if (!function_exists('iconColor')) {
-        function iconColor($status)
-        {
-            return match ($status) {
-                Spatie\Health\Enums\Status::ok()->value => 'success',
-                Spatie\Health\Enums\Status::warning()->value => 'warning',
-                Spatie\Health\Enums\Status::skipped()->value => 'info',
-                Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'danger',
-                default => 'info',
-            };
-        }
-    }
-
-    if (!function_exists('icon')) {
-        function icon($status)
-        {
-            return match ($status) {
-                Spatie\Health\Enums\Status::ok()->value => 'check-circle',
-                Spatie\Health\Enums\Status::warning()->value => 'exclamation-circle',
-                Spatie\Health\Enums\Status::skipped()->value => 'arrow-right-circle',
-                Spatie\Health\Enums\Status::failed()->value, Spatie\Health\Enums\Status::crashed()->value => 'x-circle',
-                default => '',
-            };
-        }
-    }
-@endphp
-
 <x-filament-panels::page>
-    <div x-data="{}" x-load-css="[@js(\Filament\Support\Facades\FilamentAsset::getStyleHref('filament-spatie-health-styles', package: 'filament-spatie-health'))]">
-        <div class="filament-spatie-health">
-            @if (count($checkResults?->storedCheckResults ?? []))
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mb-5">
-                    @foreach ($checkResults->storedCheckResults as $result)
-                        <x-filament::section :has-content-el="false" :icon="'heroicon-s-' . icon($result->status)" :icon-color="match ($result->status) {
-                            Spatie\Health\Enums\Status::ok()->value => 'success',
-                            Spatie\Health\Enums\Status::warning()->value => 'warning',
-                            Spatie\Health\Enums\Status::skipped()->value => 'info',
-                            Spatie\Health\Enums\Status::failed()->value,
-                            Spatie\Health\Enums\Status::crashed()->value
-                                => 'danger',
-                            default => 'gray',
-                        }" icon-size="2xl">
-                            <x-slot name="heading">
-                                {{ $result->label }}
-                            </x-slot>
-
-                            <x-slot name="description">
-                                @if (!empty($result->notificationMessage))
-                                    {{ $result->notificationMessage }}
-                                @else
-                                    {{ $result->shortSummary }}
-                                @endif
-                            </x-slot>
-                        </x-filament::section>
-                    @endforeach
-                </div>
-            @endif
+    <div class="filament-spatie-health">
+        <div class="health-results-toolbar">
+            <div class="health-filter-tabs" role="group" aria-label="{{ __('filament-spatie-health::health.pages.health_check_results.heading') }}">
+                <button type="button" aria-pressed="{{ $needsAttention ? 'false' : 'true' }}" wire:click="$set('needsAttention', false)">
+                    {{ __('filament-spatie-health::health.all_checks') }}
+                    <span>{{ $checkResults?->storedCheckResults->count() ?? 0 }}</span>
+                </button>
+                <button type="button" aria-pressed="{{ $needsAttention ? 'true' : 'false' }}" wire:click="$set('needsAttention', true)">
+                    {{ __('filament-spatie-health::health.needs_attention') }}
+                    <span>{{ $attentionCount }}</span>
+                </button>
+            </div>
 
             @if ($lastRanAt)
-                <div
-                    class="{{ $lastRanAt->diffInMinutes() > 5 ? 'text-danger-400' : 'text-info-400' }} text-md text-center font-medium">
-                    <span>{{ __('filament-spatie-health::health.pages.health_check_results.notifications.check_results', ['lastRanAt' => $lastRanAt->diffForHumans()]) }}</span>
+                <div class="health-run-time" @if ($lastRanAt->diffInMinutes() > 5) data-stale @endif>
+                    <x-filament::icon icon="heroicon-o-clock" aria-hidden="true" />
+                    <span>{{ __('filament-spatie-health::health.latest_run') }} · <time datetime="{{ $lastRanAt->toIso8601String() }}" title="{{ $lastRanAt->isoFormat('LLLL') }}">{{ $lastRanAt->diffForHumans() }}</time></span>
                 </div>
             @endif
         </div>
+
+        @if ($visibleResults?->isNotEmpty())
+            <ul class="health-result-grid">
+                @foreach ($visibleResults as $result)
+                    <li class="health-result-card" data-severity="{{ $result->status }}" wire:key="health-check-{{ $result->name }}">
+                        <div class="health-result-heading">
+                            <x-filament-spatie-health::check-icon :name="$result->name" class="health-result-icon" />
+                            <x-filament-spatie-health::status-badge :status="$result->status" />
+                        </div>
+                        <h2>{{ $result->label ?: $result->name }}</h2>
+                        @if (filled($message = $result->notificationMessage ?: $result->shortSummary))
+                            <p>{{ $message }}</p>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <p class="health-results-empty">
+                <x-filament::icon :icon="$checkResults?->storedCheckResults->isNotEmpty() ? 'heroicon-o-check-circle' : 'heroicon-o-clock'" aria-hidden="true" />
+                {{ __($checkResults?->storedCheckResults->isNotEmpty() ? 'filament-spatie-health::health.none_need_attention' : 'filament-spatie-health::health.no_results') }}
+            </p>
+        @endif
     </div>
 </x-filament-panels::page>

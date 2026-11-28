@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'Toutes les vérifications',
+    'needs_attention' => 'À examiner',
+    'none_need_attention' => 'Aucune vérification ne nécessite votre attention.',
+    'no_results' => 'Aucun résultat disponible pour le moment.',
+
+    'recent_runs' => ':count dernières exécutions',
+    'latest_run' => 'Dernière exécution',
+
+    'status_labels' => [
+        'ok' => 'Réussie',
+        'failed' => 'Échec',
+        'warning' => 'Avertissement',
+        'crashed' => 'Erreur d’exécution',
+        'skipped' => 'Ignorée',
+        'other' => 'Inconnu',
+    ],
+
+    'status_counts' => [
+        'ok' => 'Réussies : :count',
+        'other' => 'Autres : :count',
+        'failed' => 'Échecs : :count',
+        'crashed' => 'Erreurs d’exécution : :count',
+        'warning' => 'Avertissements : :count',
+        'skipped' => 'Ignorées : :count',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [

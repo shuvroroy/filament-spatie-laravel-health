@@ -8,7 +8,9 @@
 
 This package adds a Filament page for monitoring checks registered with [spatie/laravel-health](https://spatie.be/docs/laravel-health/v1/introduction). It supports Filament 4 and 5 and PHP 8.2 or newer. CI tests PHP 8.6 with Laravel 13.
 
-<img width="1486" alt="Screenshot 2023-08-04 at 10 06 01 PM" src="https://github.com/shuvroroy/filament-spatie-laravel-health/assets/21066418/fe0b9b55-04ef-4ea9-b89f-bd6e0cf0964a">
+| Light mode | Dark mode |
+| --- | --- |
+| ![Application Health in light mode showing one failed check, one warning, and two passing checks](art/results-light.png) | ![The same four health checks in dark mode](art/results-dark.png) |
 
 ## Installation
 
@@ -23,12 +25,6 @@ Laravel Health can store results [in various ways](https://spatie.be/docs/larave
 ```bash
 php artisan vendor:publish --tag="health-migrations"
 php artisan migrate
-```
-
-Publish Filament's assets:
-
-```bash
-php artisan filament:assets
 ```
 
 ## Usage
@@ -53,6 +49,12 @@ class AdminPanelProvider extends PanelProvider
             ->plugin(FilamentSpatieLaravelHealthPlugin::make());
     }
 }
+```
+
+After registering the plugin, publish the panel assets:
+
+```bash
+php artisan filament:assets
 ```
 
 Register your health checks in the `boot()` method of `app/Providers/AppServiceProvider.php`:
@@ -82,6 +84,32 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 See the [available checks](https://spatie.be/docs/laravel-health/v1/available-checks/overview) in the Laravel Health documentation.
+
+## Viewing results
+
+Open **Application Health** in the panel to see the latest stored results. Select **Needs attention** to show warnings, failures, and crashed checks. Skipped checks also appear when Spatie's `health.treat_skipped_as_failure` setting is enabled (the default). The filtered URL can be bookmarked or shared with another authorized user.
+
+To populate the page for the first time, select **Refresh** or run `php artisan health:check`. Opening the page and switching filters read the stored results. **Refresh** runs the checks again.
+
+## Optional dashboard widget
+
+Enable the widget in the panel provider for each dashboard where you want it:
+
+```php
+$panel->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
+```
+
+| Light mode | Dark mode |
+| --- | --- |
+| ![Dashboard widget in light mode showing two checks needing attention and the last 12 runs](art/widget-light.png) | ![The same dashboard widget and run history in dark mode](art/widget-dark.png) |
+
+The widget reads saved results every minute while visible. It shows the last run time and previews up to two checks per affected status, starting with crashed and failed checks.
+
+Select **All checks** in the widget header to open the full list. When checks need attention, select **Needs attention** beside the chart to open the filtered results.
+
+With Spatie's Eloquent store active and at least two recorded runs, the chart shows how many checks needed attention in each of the most recent runs (up to 12, oldest first). Hover, tap, or focus a bar for the run time and affected count out of the total. With one run or a latest-only store, the widget shows a status breakdown of the latest results.
+
+The widget checks the plugin's `authorize()` callback and the configured results page's `canAccess()` method before reading health results. If your custom page restricts access through route middleware, apply the same policy through `authorize()` before enabling the widget. The widget runs on the dashboard route, where the results page's middleware does not run.
 
 ## Customising the navigation
 

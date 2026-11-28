@@ -11,6 +11,7 @@ use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
 
 enum NavigationGroup: string
 {
@@ -36,8 +37,18 @@ class PluginTest extends TestCase
         self::assertSame('filament-spatie-health', $this->plugin->getId());
         self::assertSame(HealthCheckResults::class, $this->plugin->getPage());
         self::assertContains(HealthCheckResults::class, $this->panel->getPages());
+        self::assertNotContains(HealthOverviewWidget::class, $this->panel->getWidgets());
         self::assertSame($this->plugin, FilamentSpatieLaravelHealthPlugin::get());
         $this->plugin->boot($this->panel);
+    }
+
+    public function test_dashboard_widget_can_be_enabled_per_panel(): void
+    {
+        $panel = Panel::make()->id('operations')->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
+
+        self::assertContains(HealthOverviewWidget::class, $panel->getWidgets());
+        self::assertContains(HealthCheckResults::class, $panel->getPages());
+        self::assertNotContains(HealthOverviewWidget::class, $this->panel->getWidgets());
     }
 
     public function test_it_can_use_a_custom_page(): void
@@ -81,13 +92,16 @@ class PluginTest extends TestCase
         self::assertTrue($this->plugin->authorize(fn (): bool => true)->isAuthorized());
     }
 
-    public function test_it_registers_its_stylesheet_as_an_on_demand_asset(): void
+    public function test_the_panel_includes_the_health_stylesheet_in_its_initial_styles(): void
     {
-        $styles = FilamentAsset::getStyles(['filament-spatie-health']);
+        $this->panel->registerAssets();
+
+        $styles = FilamentAsset::getStyles(['shuvroroy/filament-spatie-laravel-health']);
         self::assertCount(1, $styles);
         self::assertSame('filament-spatie-health-styles', $styles[0]->getId());
         self::assertStringEndsWith('/resources/dist/plugin.css', (string) $styles[0]->getPath());
-        self::assertTrue($styles[0]->isLoadedOnRequest());
+        self::assertStringContainsString('/css/shuvroroy/filament-spatie-laravel-health/filament-spatie-health-styles.css?v=', $styles[0]->getHref());
+        self::assertFalse($styles[0]->isLoadedOnRequest());
     }
 
     /** @return iterable<string, array{callable(FilamentSpatieLaravelHealthPlugin): mixed, callable(FilamentSpatieLaravelHealthPlugin): mixed}> */

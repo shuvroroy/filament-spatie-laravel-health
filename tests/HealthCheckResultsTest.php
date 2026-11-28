@@ -81,7 +81,7 @@ class HealthCheckResultsTest extends TestCase
         app()->instance(ResultStore::class, $store);
         $viewData = (new TestableHealthCheckResults)->viewData();
         self::assertNull($viewData['checkResults']);
-        self::assertInstanceOf(Carbon::class, $viewData['lastRanAt']);
+        self::assertNull($viewData['lastRanAt']);
     }
 
     public function test_it_runs_health_checks_refreshes_itself_and_sends_a_notification(): void

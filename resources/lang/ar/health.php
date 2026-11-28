@@ -2,6 +2,32 @@
 
 return [
 
+    'all_checks' => 'كل الفحوصات',
+    'needs_attention' => 'تحتاج إلى انتباه',
+    'none_need_attention' => 'لا توجد فحوصات تحتاج إلى انتباه.',
+    'no_results' => 'لا توجد نتائج فحوصات حتى الآن.',
+
+    'recent_runs' => 'آخر :count عمليات فحص',
+    'latest_run' => 'آخر عملية فحص',
+
+    'status_labels' => [
+        'ok' => 'ناجح',
+        'failed' => 'فشل',
+        'warning' => 'تحذير',
+        'crashed' => 'تعطّل',
+        'skipped' => 'تم تخطيه',
+        'other' => 'غير معروف',
+    ],
+
+    'status_counts' => [
+        'ok' => 'ناجحة: :count',
+        'other' => 'أخرى: :count',
+        'failed' => 'فشل: :count',
+        'crashed' => 'تعطّل: :count',
+        'warning' => 'تحذيرات: :count',
+        'skipped' => 'تم تخطيها: :count',
+    ],
+
     'pages' => [
         'health_check_results' => [
             'buttons' => [
@@ -16,7 +42,7 @@ return [
             ],
 
             'notifications' => [
-                'check_results' => 'تمت عملية الفحص',
+                'check_results' => 'آخر فحص: :lastRanAt',
             ],
         ],
     ],
