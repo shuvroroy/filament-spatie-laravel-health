@@ -109,7 +109,7 @@ Select **All checks** in the widget header to open the full list. When checks ne
 
 With Spatie's Eloquent store active and at least two recorded runs, the chart shows how many checks needed attention in each of the most recent runs (up to 12, oldest first). Hover, tap, or focus a bar for the run time and affected count out of the total. With one run or a latest-only store, the widget shows a status breakdown of the latest results.
 
-The widget respects the plugin's authorization callback and the configured results page's access rules.
+The widget checks the plugin's `authorize()` callback and the configured results page's `canAccess()` method before reading health results. If your custom page restricts access through route middleware, apply the same policy through `authorize()` before enabling the widget. The widget runs on the dashboard route, where the results page's middleware does not run.
 
 ## Customising the navigation
 
