@@ -107,7 +107,9 @@ The widget reads saved results every minute while visible. It shows the last run
 
 Select **All checks** in the widget header to open the full list. When checks need attention, select **Needs attention** beside the chart to open the filtered results.
 
-With Spatie's Eloquent store active and at least two recorded runs, the chart shows how many checks needed attention in each of the most recent runs (up to 12, oldest first). Hover, tap, or focus a bar for the run time and affected count out of the total. With one run or a latest-only store, the widget shows a status breakdown of the latest results.
+With Spatie's Eloquent store active and at least two recorded runs, the chart shows how many checks needed attention in each of the last 12 runs, oldest first. With one run or a latest-only store, it shows the latest status breakdown.
+
+Hover or focus a bar to see its run time and affected count. Select the bar to open that saved run with **Needs attention** selected. Switch to **All checks** to inspect the other results from the same run, or share the URL. **Back to latest** opens the current results. If retention has removed a run, its link shows an unavailable message.
 
 The widget checks the plugin's `authorize()` callback and the configured results page's `canAccess()` method before reading health results. If your custom page restricts access through route middleware, apply the same policy through `authorize()` before enabling the widget. The widget runs on the dashboard route, where the results page's middleware does not run.
 
