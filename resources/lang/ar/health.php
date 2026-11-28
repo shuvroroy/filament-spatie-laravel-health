@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'لا توجد فحوصات تحتاج إلى انتباه.',
     'no_results' => 'لا توجد نتائج فحوصات حتى الآن.',
 
+    'check_history' => 'السجل الأخير',
     'recent_runs' => 'آخر :count عمليات فحص',
     'latest_run' => 'آخر عملية فحص',
     'saved_run' => 'تشغيل محفوظ',

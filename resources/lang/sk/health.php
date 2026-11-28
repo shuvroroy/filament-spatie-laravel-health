@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Žiadna kontrola nevyžaduje pozornosť.',
     'no_results' => 'Zatiaľ nie sú k dispozícii žiadne výsledky kontrol.',
 
+    'check_history' => 'Nedávna história',
     'recent_runs' => 'Posledné spustenia (:count)',
     'latest_run' => 'Posledné spustenie',
     'saved_run' => 'Uložený beh',

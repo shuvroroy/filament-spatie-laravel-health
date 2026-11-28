@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Tidak ada pemeriksaan yang memerlukan perhatian.',
     'no_results' => 'Belum ada hasil pemeriksaan.',
 
+    'check_history' => 'Riwayat terbaru',
     'recent_runs' => ':count pemeriksaan terakhir',
     'latest_run' => 'Pemeriksaan terakhir',
     'saved_run' => 'Pemeriksaan tersimpan',

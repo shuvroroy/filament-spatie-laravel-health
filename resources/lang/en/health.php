@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'No checks need attention.',
     'no_results' => 'No check results available yet.',
 
+    'check_history' => 'Recent history',
     'recent_runs' => 'Last :count runs',
     'latest_run' => 'Latest run',
     'saved_run' => 'Saved run',

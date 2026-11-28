@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'هیچ بررسی‌ای به توجه نیاز ندارد.',
     'no_results' => 'هنوز نتیجه‌ای برای بررسی‌ها ثبت نشده است.',
 
+    'check_history' => 'تاریخچهٔ اخیر',
     'recent_runs' => ':count اجرای اخیر',
     'latest_run' => 'آخرین اجرا',
     'saved_run' => 'اجرای ذخیره‌شده',

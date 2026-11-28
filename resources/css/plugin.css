@@ -251,6 +251,16 @@
 }
 .health-check-details dt { color: var(--health-muted); font-size: 0.75rem; }
 .health-check-details dd { margin-block-start: 0.2rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.health-check-history li + li { border-block-start: 1px solid var(--health-rule); }
+.health-check-history li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.625rem;
+    min-block-size: 2.75rem;
+    padding: 0.4rem 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
 
 @container (max-width: 36rem) {
     .filament-spatie-health .health-run-time {

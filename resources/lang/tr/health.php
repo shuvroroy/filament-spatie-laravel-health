@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'İlgilenilmesi gereken kontrol yok.',
     'no_results' => 'Henüz kontrol sonucu yok.',
 
+    'check_history' => 'Son sonuçlar',
     'recent_runs' => 'Son :count çalıştırma',
     'latest_run' => 'Son çalıştırma',
     'saved_run' => 'Kaydedilmiş çalıştırma',

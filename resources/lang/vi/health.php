@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Không có kiểm tra nào cần chú ý.',
     'no_results' => 'Chưa có kết quả kiểm tra.',
 
+    'check_history' => 'Lịch sử gần đây',
     'recent_runs' => ':count lần chạy gần nhất',
     'latest_run' => 'Lần chạy gần nhất',
     'saved_run' => 'Lần chạy đã lưu',

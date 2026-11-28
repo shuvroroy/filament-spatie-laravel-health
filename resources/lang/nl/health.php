@@ -7,6 +7,7 @@ return [
     'none_need_attention' => 'Geen enkele controle vereist aandacht.',
     'no_results' => 'Er zijn nog geen controleresultaten.',
 
+    'check_history' => 'Recente resultaten',
     'recent_runs' => 'Laatste :count uitvoeringen',
     'latest_run' => 'Laatste uitvoering',
     'saved_run' => 'Opgeslagen controle',
