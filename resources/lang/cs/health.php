@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Poslední běhy (:count)',
     'latest_run' => 'Poslední běh',
+    'saved_run' => 'Uložený běh',
+    'back_to_latest' => 'Zpět na nejnovější výsledky',
+    'run_unavailable' => 'Tento běh již není k dispozici.',
 
     'status_labels' => [
         'ok' => 'V pořádku',

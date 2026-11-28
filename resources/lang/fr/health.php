@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => ':count dernières exécutions',
     'latest_run' => 'Dernière exécution',
+    'saved_run' => 'Exécution enregistrée',
+    'back_to_latest' => 'Revenir aux derniers résultats',
+    'run_unavailable' => 'Cette exécution n’est plus disponible.',
 
     'status_labels' => [
         'ok' => 'Réussie',

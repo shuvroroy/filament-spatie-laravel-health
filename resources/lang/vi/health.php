@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => ':count lần chạy gần nhất',
     'latest_run' => 'Lần chạy gần nhất',
+    'saved_run' => 'Lần chạy đã lưu',
+    'back_to_latest' => 'Quay lại kết quả mới nhất',
+    'run_unavailable' => 'Lần chạy này không còn khả dụng.',
 
     'status_labels' => [
         'ok' => 'Thành công',

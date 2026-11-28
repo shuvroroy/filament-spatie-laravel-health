@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'ბოლო :count გაშვება',
     'latest_run' => 'ბოლო გაშვება',
+    'saved_run' => 'შენახული გაშვება',
+    'back_to_latest' => 'ბოლო შედეგებზე დაბრუნება',
+    'run_unavailable' => 'ეს გაშვება აღარ არის ხელმისაწვდომი.',
 
     'status_labels' => [
         'ok' => 'წარმატებული',

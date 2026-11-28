@@ -9,6 +9,9 @@ return [
 
     'recent_runs' => 'Laatste :count uitvoeringen',
     'latest_run' => 'Laatste uitvoering',
+    'saved_run' => 'Opgeslagen controle',
+    'back_to_latest' => 'Terug naar de laatste resultaten',
+    'run_unavailable' => 'Deze controle is niet meer beschikbaar.',
 
     'status_labels' => [
         'ok' => 'Geslaagd',
