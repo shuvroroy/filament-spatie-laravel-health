@@ -9,6 +9,7 @@ use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use LogicException;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
 use UnitEnum;
 
 /** @phpstan-consistent-constructor */
@@ -17,6 +18,8 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     use EvaluatesClosures;
 
     protected bool | Closure $authorizeUsing = true;
+
+    protected bool $hasDashboardWidget = false;
 
     protected bool $navigationGroupSet = false;
 
@@ -34,11 +37,22 @@ class FilamentSpatieLaravelHealthPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->pages([$this->getPage()]);
+
+        if ($this->hasDashboardWidget) {
+            $panel->widgets([HealthOverviewWidget::class]);
+        }
     }
 
     public function boot(Panel $panel): void
     {
         //
+    }
+
+    public function dashboardWidget(bool $enabled = true): static
+    {
+        $this->hasDashboardWidget = $enabled;
+
+        return $this;
     }
 
     public function authorize(bool | Closure $callback = true): static

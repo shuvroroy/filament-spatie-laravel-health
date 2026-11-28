@@ -11,6 +11,7 @@ use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
 
 enum NavigationGroup: string
 {
@@ -36,8 +37,18 @@ class PluginTest extends TestCase
         self::assertSame('filament-spatie-health', $this->plugin->getId());
         self::assertSame(HealthCheckResults::class, $this->plugin->getPage());
         self::assertContains(HealthCheckResults::class, $this->panel->getPages());
+        self::assertNotContains(HealthOverviewWidget::class, $this->panel->getWidgets());
         self::assertSame($this->plugin, FilamentSpatieLaravelHealthPlugin::get());
         $this->plugin->boot($this->panel);
+    }
+
+    public function test_dashboard_widget_can_be_enabled_per_panel(): void
+    {
+        $panel = Panel::make()->id('operations')->plugin(FilamentSpatieLaravelHealthPlugin::make()->dashboardWidget());
+
+        self::assertContains(HealthOverviewWidget::class, $panel->getWidgets());
+        self::assertContains(HealthCheckResults::class, $panel->getPages());
+        self::assertNotContains(HealthOverviewWidget::class, $this->panel->getWidgets());
     }
 
     public function test_it_can_use_a_custom_page(): void
