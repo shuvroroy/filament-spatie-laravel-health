@@ -8,7 +8,9 @@ use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Artisan;
+use Livewire\Attributes\Url;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Support\ChecksNeedingAttention;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\ResultStores\ResultStore;
 use UnitEnum;
@@ -21,6 +23,9 @@ class HealthCheckResults extends Page
     protected $listeners = ['refresh-component' => '$refresh'];
 
     protected string $view = 'filament-spatie-health::pages.health-check-results';
+
+    #[Url]
+    public bool $needsAttention = false;
 
     protected function getHeaderActions(): array
     {
@@ -64,10 +69,13 @@ class HealthCheckResults extends Page
     protected function getViewData(): array
     {
         $checkResults = app(ResultStore::class)->latestResults();
+        $attentionResults = ChecksNeedingAttention::from($checkResults);
 
         return [
-            'lastRanAt' => new Carbon($checkResults?->finishedAt),
+            'lastRanAt' => $checkResults ? Carbon::instance($checkResults->finishedAt) : null,
             'checkResults' => $checkResults,
+            'visibleResults' => $this->needsAttention ? $attentionResults : $checkResults?->storedCheckResults,
+            'attentionCount' => $attentionResults->count(),
         ];
     }
 
