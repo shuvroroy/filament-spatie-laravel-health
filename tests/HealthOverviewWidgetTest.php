@@ -10,11 +10,14 @@ use Filament\Panel;
 use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
+use PHPUnit\Framework\Attributes\DataProvider;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\HealthCheckResults;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Widgets\HealthOverviewWidget;
@@ -146,6 +149,9 @@ class HealthOverviewWidgetTest extends TestCase
             ->assertSee('Back to latest')->assertDontSeeText('Refresh')
             ->assertSee('Disk from run 3')->assertDontSee('Database from run 3')->assertDontSee('Disk from run 13')
             ->set('needsAttention', false)->assertSee('Database from run 3')->assertSet('run', $batch);
+        $kernel = $this->createMock(Kernel::class);
+        $kernel->expects(self::never())->method('call');
+        Artisan::swap($kernel);
         $page->call('refresh')->assertSee('Saved run');
         DemoHistoryItem::query()->where('batch', $batch)->delete();
         $page->call('$refresh')->assertSee('This run is no longer available.')->assertDontSee('Disk from run 13');
@@ -162,6 +168,28 @@ class HealthOverviewWidgetTest extends TestCase
 
         Livewire::withQueryParams(['run' => '00000000-0000-0000-0000-000000000001'])->test(OperationsHealthPage::class)
             ->assertSee('This run is no longer available.')->assertSee('Back to latest');
+    }
+
+    /** @return array<string, array{string|list<string>}> */
+    public static function malformedRunSelectors(): array
+    {
+        return [
+            'array' => [['invalid']],
+            'empty' => [''],
+        ];
+    }
+
+    /** @param string|list<string> $selector */
+    #[DataProvider('malformedRunSelectors')]
+    public function test_a_malformed_run_never_reads_latest_results(string | array $selector): void
+    {
+        $store = $this->createMock(ResultStore::class);
+        $store->expects(self::never())->method('latestResults');
+        app()->instance(ResultStore::class, $store);
+
+        Livewire::withQueryParams(['run' => $selector])->test(OperationsHealthPage::class)
+            ->assertSee('This run is no longer available.')->assertSee('Back to latest')->assertDontSeeText('Refresh')
+            ->call('$refresh')->assertSee('This run is no longer available.');
     }
 
     public function test_skipped_checks_can_be_excluded_from_the_widget_and_filter(): void

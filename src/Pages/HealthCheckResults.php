@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Url;
 use ShuvroRoy\FilamentSpatieLaravelHealth\FilamentSpatieLaravelHealthPlugin;
+use ShuvroRoy\FilamentSpatieLaravelHealth\Pages\Concerns\HasSelectedHealthRun;
 use ShuvroRoy\FilamentSpatieLaravelHealth\Support\ChecksNeedingAttention;
 use Spatie\Health\Commands\RunHealthChecksCommand;
 use Spatie\Health\Models\HealthCheckResultHistoryItem;
@@ -22,6 +23,8 @@ use UnitEnum;
 
 class HealthCheckResults extends Page
 {
+    use HasSelectedHealthRun;
+
     /**
      * @var array<string, string>
      */
@@ -31,9 +34,6 @@ class HealthCheckResults extends Page
 
     #[Url]
     public bool $needsAttention = false;
-
-    #[Url]
-    public ?string $run = null;
 
     protected function getHeaderActions(): array
     {
