@@ -131,7 +131,7 @@ class HealthCheckResults extends Page
         $outcomes = $query->whereRaw($exactName, [$name])
             ->latest('created_at')
             ->orderByDesc($historyItem->getIncrementing() ? $historyItem->getKeyName() : 'batch')
-            ->limit(12)
+            ->limit(10)
             ->get(['created_at', 'status']);
 
         return view('filament-spatie-health::pages.check-history', [

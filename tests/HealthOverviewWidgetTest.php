@@ -199,7 +199,7 @@ class HealthOverviewWidgetTest extends TestCase
             ->assertDontSee('private-token')->assertDontSee('private-cache')->assertDontSee('private-nested')->assertDontSee('Nested metadata')->assertDontSee('Missing value');
     }
 
-    public function test_the_drawer_loads_only_the_selected_checks_last_twelve_outcomes_on_demand(): void
+    public function test_the_drawer_loads_only_the_selected_checks_last_ten_outcomes_on_demand(): void
     {
         $this->useCustomHistoryStore();
         Schema::table('custom_health_history', fn (Blueprint $table) => $table->string('check_name')->collation('NOCASE')->change());
@@ -232,7 +232,7 @@ class HealthOverviewWidgetTest extends TestCase
             $dom->loadHTML($html, LIBXML_NOERROR);
             self::assertCount(0, $dom->getElementsByTagName('a'));
             $rows = $dom->getElementsByTagName('li');
-            $expected = array_slice(array_reverse(array_values($diskRuns)), 0, 12);
+            $expected = array_slice(array_reverse(array_values($diskRuns)), 0, 10);
             self::assertCount(count($expected), $rows);
             foreach ($rows as $index => $row) {
                 [$timestamp, $label] = $expected[$index];
